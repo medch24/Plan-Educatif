@@ -1,0 +1,43 @@
+{
+  "name": "systeme-scolaire-integre",
+  "version": "1.0.0",
+  "description": "Système intégré de gestion scolaire : Distribution Annuelle, Plans Hebdomadaires et Devoirs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Tests à implémenter\" && exit 0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "latest",
+    "archiver": "^6.0.1",
+    "convertapi": "^1.15.0",
+    "cors": "^2.8.5",
+    "docxtemplater": "^3.47.1",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.4.3",
+    "mammoth": "^1.8.0",
+    "mongodb": "^6.5.0",
+    "node-fetch": "^2.7.0",
+    "openai": "^4.57.0",
+    "pizzip": "^3.1.6",
+    "web-push": "^3.6.7",
+    "xlsx": "^0.18.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "education",
+    "planning",
+    "distribution",
+    "devoirs",
+    "scolaire",
+    "mongodb",
+    "express"
+  ],
+  "author": "Système Scolaire Intégré",
+  "license": "MIT"
+}

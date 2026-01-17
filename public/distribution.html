@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Distribution Annuelle 2025-2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.6/dist/pizzip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.47.1/docxtemplater.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <link rel="stylesheet" href="css/distribution.css">
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="white"/><path d="M16 96l112-40 112 40-112 40z" fill="%232563eb"/><path d="M64 120v48c0 22 48 40 64 40s64-18 64-40v-48" fill="none" stroke="%233b82f6" stroke-width="12"/></svg>' type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Styles globaux améliorés */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            min-height: 100vh;
+        }
+        
+        .fade-in {
+            /* Animation désactivée pour éviter la vibration */
+            opacity: 1;
+        }
+        
+        .slide-in {
+            /* Animation désactivée pour éviter la vibration */
+            opacity: 1;
+        }
+        
+        /* Logo sans animation */
+        .logo-container {
+            /* Animation désactivée pour éviter la vibration */
+        }
+        
+        /* Boutons sections principaux */
+        .section-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 20px 40px;
+            font-size: 18px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            margin: 10px;
+            min-width: 250px;
+        }
+        
+        .section-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+        
+        .section-btn.boys-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        /* Section classes avec cartes */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .class-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .class-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Section IA spéciale */
+        .ai-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .ai-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        
+        .ai-input-group {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ai-input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .ai-btn {
+            background: #fbbf24;
+            color: #1f2937;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ai-btn:hover {
+            background: #f59e0b;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Écran d'accueil -->
+<div id="initialSelection" class="fade-in">
+    <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
+        <img src="logo-ecole.png" alt="Logo de l'école" style="max-width: 200px; width: 200px; height: 200px; margin-bottom: 10px; object-fit: cover;">
+    </div>
+    <h1 style="color: white; text-align: center; font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Distribution Annuelle 2025-2026</h1>
+    
+    
+    <div style="text-align: center; margin: 40px 0;">
+        <button class="section-btn" onclick="showClasses('maternelle')">
+            <i class="ri-bear-smile-line"></i> Section Maternelle
+        </button>
+        <button class="section-btn" onclick="showClasses('primaire')">
+            <i class="ri-book-read-line"></i> Section Primaire
+        </button>
+        <button class="section-btn" onclick="showClasses('secondaire')">
+            <i class="ri-graduation-cap-line"></i> Section Secondaire
+        </button>
+        <button class="section-btn boys-section" onclick="showClasses('secondaire-garcons')">
+            <i class="ri-user-star-line"></i> Secondaire Garçons (IA)
+        </button>
+    </div>
+    
+    <!-- Grilles de classes -->
+    <div id="maternelle" class="section-classes" style="display: none;">
+        <h2 style="color: white; text-align: center;">Maternelle</h2>
+        
+        <!-- Téléchargement Excel pour Maternelle -->
+        <div style="background: white; border-radius: 15px; padding: 25px; margin: 20px auto; max-width: 700px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+            <h3 style="color: #1f2937; text-align: center; margin-bottom: 15px; font-size: 1.3em;">
+                <i class="ri-file-excel-2-line" style="color: #10b981;"></i> 
+                Télécharger Distribution Hebdomadaire
+            </h3>
+            <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <label for="weekSelectMaternelle" style="font-weight: bold; color: #1f2937;">Semaine :</label>
+                <select id="weekSelectMaternelle" class="week-selector" style="padding: 10px 18px; border-radius: 8px; border: 2px solid #d1d5db; font-size: 15px; min-width: 180px; cursor: pointer;">
+                    <option value="">-- Choisir --</option>
+                    <option value="Semaine 1">Semaine 1</option>
+                    <option value="Semaine 2">Semaine 2</option>
+                    <option value="Semaine 3">Semaine 3</option>
+                    <option value="Semaine 4">Semaine 4</option>
+                    <option value="Semaine 5">Semaine 5</option>
+                    <option value="Semaine 6">Semaine 6</option>
+                    <option value="Semaine 7">Semaine 7</option>
+                    <option value="Semaine 8">Semaine 8</option>
+                    <option value="Semaine 9">Semaine 9</option>
+                    <option value="Semaine 10">Semaine 10</option>
+                    <option value="Semaine 11">Semaine 11</option>
+                    <option value="Semaine 12">Semaine 12</option>
+                    <option value="Semaine 13">Semaine 13</option>
+                    <option value="Semaine 14">Semaine 14</option>
+                    <option value="Semaine 15">Semaine 15</option>
+                    <option value="Semaine 16">Semaine 16</option>
+                    <option value="Semaine 17">Semaine 17</option>
+                    <option value="Semaine 18">Semaine 18</option>
+                    <option value="Semaine 19">Semaine 19</option>
+                    <option value="Semaine 20">Semaine 20</option>
+                    <option value="Semaine 21">Semaine 21</option>
+                    <option value="Semaine 22">Semaine 22</option>
+                    <option value="Semaine 23">Semaine 23</option>
+                    <option value="Semaine 24">Semaine 24</option>
+                    <option value="Semaine 25">Semaine 25</option>
+                    <option value="Semaine 26">Semaine 26</option>
+                    <option value="Semaine 27">Semaine 27</option>
+                    <option value="Semaine 28">Semaine 28</option>
+                    <option value="Semaine 29">Semaine 29</option>
+                    <option value="Semaine 30">Semaine 30</option>
+                    <option value="Semaine 31">Semaine 31</option>
+                </select>
+                <button onclick="downloadWeeklyExcel('maternelle')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 10px 30px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 12px rgba(16, 185, 129, 0.4); transition: all 0.3s ease;">
+                    <i class="ri-download-2-line"></i> Télécharger Excel
+                </button>
+            </div>
+        </div>
+        
+        <div class="classes-grid">
+            <div class="class-card" onclick="goToClass('TPS', false)">
+                <i class="ri-seedling-line" style="font-size: 2em; color: #10b981;"></i>
+                <h3>TPS</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PS', false)">
+                <i class="ri-plant-line" style="font-size: 2em; color: #10b981;"></i>
+                <h3>PS</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('MS', false)">
+                <i class="ri-leaf-line" style="font-size: 2em; color: #10b981;"></i>
+                <h3>MS</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('GS', false)">
+                <i class="ri-flower-line" style="font-size: 2em; color: #10b981;"></i>
+                <h3>GS</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div id="primaire" class="section-classes" style="display: none;">
+        <h2 style="color: white; text-align: center;">Primaire</h2>
+        
+        <!-- Téléchargement Excel pour Primaire -->
+        <div style="background: white; border-radius: 15px; padding: 25px; margin: 20px auto; max-width: 700px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+            <h3 style="color: #1f2937; text-align: center; margin-bottom: 15px; font-size: 1.3em;">
+                <i class="ri-file-excel-2-line" style="color: #10b981;"></i> 
+                Télécharger Distribution Hebdomadaire
+            </h3>
+            <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <label for="weekSelectPrimaire" style="font-weight: bold; color: #1f2937;">Semaine :</label>
+                <select id="weekSelectPrimaire" class="week-selector" style="padding: 10px 18px; border-radius: 8px; border: 2px solid #d1d5db; font-size: 15px; min-width: 180px; cursor: pointer;">
+                    <option value="">-- Choisir --</option>
+                    <option value="Semaine 1">Semaine 1</option>
+                    <option value="Semaine 2">Semaine 2</option>
+                    <option value="Semaine 3">Semaine 3</option>
+                    <option value="Semaine 4">Semaine 4</option>
+                    <option value="Semaine 5">Semaine 5</option>
+                    <option value="Semaine 6">Semaine 6</option>
+                    <option value="Semaine 7">Semaine 7</option>
+                    <option value="Semaine 8">Semaine 8</option>
+                    <option value="Semaine 9">Semaine 9</option>
+                    <option value="Semaine 10">Semaine 10</option>
+                    <option value="Semaine 11">Semaine 11</option>
+                    <option value="Semaine 12">Semaine 12</option>
+                    <option value="Semaine 13">Semaine 13</option>
+                    <option value="Semaine 14">Semaine 14</option>
+                    <option value="Semaine 15">Semaine 15</option>
+                    <option value="Semaine 16">Semaine 16</option>
+                    <option value="Semaine 17">Semaine 17</option>
+                    <option value="Semaine 18">Semaine 18</option>
+                    <option value="Semaine 19">Semaine 19</option>
+                    <option value="Semaine 20">Semaine 20</option>
+                    <option value="Semaine 21">Semaine 21</option>
+                    <option value="Semaine 22">Semaine 22</option>
+                    <option value="Semaine 23">Semaine 23</option>
+                    <option value="Semaine 24">Semaine 24</option>
+                    <option value="Semaine 25">Semaine 25</option>
+                    <option value="Semaine 26">Semaine 26</option>
+                    <option value="Semaine 27">Semaine 27</option>
+                    <option value="Semaine 28">Semaine 28</option>
+                    <option value="Semaine 29">Semaine 29</option>
+                    <option value="Semaine 30">Semaine 30</option>
+                    <option value="Semaine 31">Semaine 31</option>
+                </select>
+                <button onclick="downloadWeeklyExcel('primaire')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 10px 30px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 12px rgba(16, 185, 129, 0.4); transition: all 0.3s ease;">
+                    <i class="ri-download-2-line"></i> Télécharger Excel
+                </button>
+            </div>
+        </div>
+        
+        <div class="classes-grid">
+            <div class="class-card" onclick="goToClass('PP1', false)">
+                <i class="ri-bookmark-line" style="font-size: 2em; color: #3b82f6;"></i>
+                <h3>PP1</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PP2', false)">
+                <i class="ri-bookmark-2-line" style="font-size: 2em; color: #3b82f6;"></i>
+                <h3>PP2</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PP3', false)">
+                <i class="ri-bookmark-3-line" style="font-size: 2em; color: #3b82f6;"></i>
+                <h3>PP3</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PP4', false)">
+                <i class="ri-booklet-line" style="font-size: 2em; color: #3b82f6;"></i>
+                <h3>PP4</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PP5', false)">
+                <i class="ri-book-open-line" style="font-size: 2em; color: #3b82f6;"></i>
+                <h3>PP5</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div id="secondaire" class="section-classes" style="display: none;">
+        <h2 style="color: white; text-align: center;">Secondaire</h2>
+        
+        <!-- Téléchargement Excel pour Secondaire -->
+        <div style="background: white; border-radius: 15px; padding: 25px; margin: 20px auto; max-width: 700px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+            <h3 style="color: #1f2937; text-align: center; margin-bottom: 15px; font-size: 1.3em;">
+                <i class="ri-file-excel-2-line" style="color: #10b981;"></i> 
+                Télécharger Distribution Hebdomadaire
+            </h3>
+            <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <label for="weekSelectSecondaire" style="font-weight: bold; color: #1f2937;">Semaine :</label>
+                <select id="weekSelectSecondaire" class="week-selector" style="padding: 10px 18px; border-radius: 8px; border: 2px solid #d1d5db; font-size: 15px; min-width: 180px; cursor: pointer;">
+                    <option value="">-- Choisir --</option>
+                    <option value="Semaine 1">Semaine 1</option>
+                    <option value="Semaine 2">Semaine 2</option>
+                    <option value="Semaine 3">Semaine 3</option>
+                    <option value="Semaine 4">Semaine 4</option>
+                    <option value="Semaine 5">Semaine 5</option>
+                    <option value="Semaine 6">Semaine 6</option>
+                    <option value="Semaine 7">Semaine 7</option>
+                    <option value="Semaine 8">Semaine 8</option>
+                    <option value="Semaine 9">Semaine 9</option>
+                    <option value="Semaine 10">Semaine 10</option>
+                    <option value="Semaine 11">Semaine 11</option>
+                    <option value="Semaine 12">Semaine 12</option>
+                    <option value="Semaine 13">Semaine 13</option>
+                    <option value="Semaine 14">Semaine 14</option>
+                    <option value="Semaine 15">Semaine 15</option>
+                    <option value="Semaine 16">Semaine 16</option>
+                    <option value="Semaine 17">Semaine 17</option>
+                    <option value="Semaine 18">Semaine 18</option>
+                    <option value="Semaine 19">Semaine 19</option>
+                    <option value="Semaine 20">Semaine 20</option>
+                    <option value="Semaine 21">Semaine 21</option>
+                    <option value="Semaine 22">Semaine 22</option>
+                    <option value="Semaine 23">Semaine 23</option>
+                    <option value="Semaine 24">Semaine 24</option>
+                    <option value="Semaine 25">Semaine 25</option>
+                    <option value="Semaine 26">Semaine 26</option>
+                    <option value="Semaine 27">Semaine 27</option>
+                    <option value="Semaine 28">Semaine 28</option>
+                    <option value="Semaine 29">Semaine 29</option>
+                    <option value="Semaine 30">Semaine 30</option>
+                    <option value="Semaine 31">Semaine 31</option>
+                </select>
+                <button onclick="downloadWeeklyExcel('secondaire')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 10px 30px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 12px rgba(16, 185, 129, 0.4); transition: all 0.3s ease;">
+                    <i class="ri-download-2-line"></i> Télécharger Excel
+                </button>
+            </div>
+        </div>
+        
+        <div class="classes-grid">
+            <div class="class-card" onclick="goToClass('PEI1', false)">
+                <i class="ri-graduation-cap-line" style="font-size: 2em; color: #8b5cf6;"></i>
+                <h3>PEI1</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI2', false)">
+                <i class="ri-graduation-cap-fill" style="font-size: 2em; color: #8b5cf6;"></i>
+                <h3>PEI2</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI3', false)">
+                <i class="ri-medal-line" style="font-size: 2em; color: #8b5cf6;"></i>
+                <h3>PEI3</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI4', false)">
+                <i class="ri-medal-fill" style="font-size: 2em; color: #8b5cf6;"></i>
+                <h3>PEI4</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI5', false)">
+                <i class="ri-trophy-line" style="font-size: 2em; color: #8b5cf6;"></i>
+                <h3>PEI5</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('DP1', false)">
+                <i class="ri-award-line" style="font-size: 2em; color: #ec4899;"></i>
+                <h3>DP1</h3>
+            </div>
+            <div class="class-card" onclick="goToClass('DP2', false)">
+                <i class="ri-award-fill" style="font-size: 2em; color: #ec4899;"></i>
+                <h3>DP2</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div id="secondaire-garcons" class="section-classes" style="display: none;">
+        <h2 style="color: white; text-align: center;">
+            <i class="ri-user-star-line"></i> Secondaire Garçons (avec IA)
+        </h2>
+        
+        <!-- Téléchargement Excel pour Secondaire Garçons -->
+        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; padding: 25px; margin: 20px auto; max-width: 700px; box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);">
+            <h3 style="color: white; text-align: center; margin-bottom: 15px; font-size: 1.3em;">
+                <i class="ri-file-excel-2-line"></i> 
+                Télécharger Distribution Hebdomadaire
+            </h3>
+            <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <label for="weekSelectGarcons" style="font-weight: bold; color: white;">Semaine :</label>
+                <select id="weekSelectGarcons" class="week-selector" style="padding: 10px 18px; border-radius: 8px; border: 2px solid white; font-size: 15px; min-width: 180px; cursor: pointer;">
+                    <option value="">-- Choisir --</option>
+                    <option value="Semaine 1">Semaine 1</option>
+                    <option value="Semaine 2">Semaine 2</option>
+                    <option value="Semaine 3">Semaine 3</option>
+                    <option value="Semaine 4">Semaine 4</option>
+                    <option value="Semaine 5">Semaine 5</option>
+                    <option value="Semaine 6">Semaine 6</option>
+                    <option value="Semaine 7">Semaine 7</option>
+                    <option value="Semaine 8">Semaine 8</option>
+                    <option value="Semaine 9">Semaine 9</option>
+                    <option value="Semaine 10">Semaine 10</option>
+                    <option value="Semaine 11">Semaine 11</option>
+                    <option value="Semaine 12">Semaine 12</option>
+                    <option value="Semaine 13">Semaine 13</option>
+                    <option value="Semaine 14">Semaine 14</option>
+                    <option value="Semaine 15">Semaine 15</option>
+                    <option value="Semaine 16">Semaine 16</option>
+                    <option value="Semaine 17">Semaine 17</option>
+                    <option value="Semaine 18">Semaine 18</option>
+                    <option value="Semaine 19">Semaine 19</option>
+                    <option value="Semaine 20">Semaine 20</option>
+                    <option value="Semaine 21">Semaine 21</option>
+                    <option value="Semaine 22">Semaine 22</option>
+                    <option value="Semaine 23">Semaine 23</option>
+                    <option value="Semaine 24">Semaine 24</option>
+                    <option value="Semaine 25">Semaine 25</option>
+                    <option value="Semaine 26">Semaine 26</option>
+                    <option value="Semaine 27">Semaine 27</option>
+                    <option value="Semaine 28">Semaine 28</option>
+                    <option value="Semaine 29">Semaine 29</option>
+                    <option value="Semaine 30">Semaine 30</option>
+                    <option value="Semaine 31">Semaine 31</option>
+                </select>
+                <button onclick="downloadWeeklyExcel('secondaire-garcons')" style="background: white; color: #f5576c; padding: 10px 30px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;">
+                    <i class="ri-download-2-line"></i> Télécharger Excel
+                </button>
+            </div>
+        </div>
+        
+        <div class="classes-grid">
+            <div class="class-card" onclick="goToClass('PEI1-G', true)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <i class="ri-robot-line" style="font-size: 2em;"></i>
+                <h3>PEI1</h3>
+                <small>IA Disponible</small>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI2-G', true)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <i class="ri-robot-line" style="font-size: 2em;"></i>
+                <h3>PEI2</h3>
+                <small>IA Disponible</small>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI3-G', true)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <i class="ri-robot-line" style="font-size: 2em;"></i>
+                <h3>PEI3</h3>
+                <small>IA Disponible</small>
+            </div>
+            <div class="class-card" onclick="goToClass('PEI4-G', true)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <i class="ri-robot-line" style="font-size: 2em;"></i>
+                <h3>PEI4</h3>
+                <small>IA Disponible</small>
+            </div>
+            <div class="class-card" onclick="goToClass('DP2-G', true)" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <i class="ri-robot-line" style="font-size: 2em;"></i>
+                <h3>DP2</h3>
+                <small>IA Disponible</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vue de classe -->
+<div id="classView" style="display: none;" class="card accent slide-in">
+    <div class="logo-container" style="text-align: center; margin-bottom: 15px;">
+        <img src="logo-ecole.png" alt="Logo de l'école" style="max-width: 150px; width: 150px; height: 150px; object-fit: cover;">
+    </div>
+    <h1 id="classTitle"></h1>
+    <button onclick="showInitialSelection()" class="secondary"><i class="ri-arrow-go-back-line"></i> Changer de Classe</button>
+    
+    <!-- Bouton IA (visible uniquement pour Secondaire Garçons) -->
+    <div id="aiButtonContainer" style="display: none; text-align: center; margin: 20px 0;">
+        <button onclick="toggleAIForm()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 15px 40px; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4); transition: all 0.3s ease;">
+            <i class="ri-magic-line"></i> Utiliser l'IA pour Générer la Distribution
+        </button>
+    </div>
+    
+    <!-- Formulaire IA (caché par défaut, s'affiche au clic) -->
+    <div id="aiDistributionSection" class="ai-section" style="display: none;">
+        <h3>
+            <i class="ri-magic-line"></i> 
+            Distribution Automatique avec IA Gemini
+        </h3>
+        <p style="margin: 10px 0; font-size: 15px;">
+            🎯 Remplissez les champs ci-dessous pour générer automatiquement votre distribution en respectant le calendrier académique et les règles de séances.
+        </p>
+        
+        <div class="ai-input-group">
+            <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">
+                📖 Sommaire du Livre Manuel (Table des Matières)
+            </label>
+            <textarea id="manuelSummary" placeholder="Exemple:
+Chapitre 1: Introduction à l'algèbre
+  1.1 Les nombres relatifs (pages 5-12)
+  1.2 Les équations du premier degré (pages 13-20)
+Chapitre 2: Géométrie
+  2.1 Les triangles (pages 21-30)
+  2.2 Le théorème de Pythagore (pages 31-38)"></textarea>
+        </div>
+        
+        <div class="ai-input-group">
+            <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">
+                📝 Sommaire du Cahier d'Activité (Exercices)
+            </label>
+            <textarea id="cahierSummary" placeholder="Exemple:
+Exercice 1: Résoudre des équations (pages 5-8)
+Exercice 2: Calcul mental (pages 9-12)
+Exercice 3: Problèmes appliqués (pages 13-16)
+Exercice 4: Construction de triangles (pages 17-22)"></textarea>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button onclick="generateAIDistribution()" style="flex: 1; background: #10b981; color: white; padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">
+                <i class="ri-sparkles-line"></i> Générer Distribution Automatique
+            </button>
+            <button onclick="toggleAIForm()" style="flex: 0.3; background: #ef4444; color: white; padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s ease;">
+                <i class="ri-close-line"></i> Annuler
+            </button>
+        </div>
+    </div>
+    
+    <!-- Boutons d'action -->
+    <div class="button-container" style="margin: 20px 0;">
+        <button onclick="generateExcel()" class="primary"><i class="ri-file-excel-2-line"></i> Excel</button>
+        <button onclick="generateWord()" class="primary"><i class="ri-file-word-2-line"></i> Word</button>
+        <button onclick="saveTable(false, true)" class="primary"><i class="ri-save-3-line"></i> Enregistrer</button>
+        <button onclick="resetCurrentMatiere()" class="danger"><i class="ri-refresh-line"></i> Réinitialiser</button>
+        <button onclick="document.getElementById('excelUploadInput').click()" class="info"><i class="ri-upload-2-line"></i> Importer Excel</button>
+        <input type="file" id="excelUploadInput" style="display: none;" onchange="handleFileUpload(event)" accept=".xlsx, .xls">
+    </div>
+    
+    <div>
+        <label for="matiereSelect">Choisir une matière :</label>
+        <select id="matiereSelect" onchange="displaySelectedTable()">
+            <option value="">Sélectionner une matière</option>
+        </select>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <label for="filterBy">Filtrer par :</label>
+        <select id="filterBy" onchange="populateFilterOptions()">
+            <option value="">Sélectionner un filtre</option>
+            <option value="Mois">Mois</option>
+            <option value="Semaine">Semaine</option>
+        </select>
+        <select id="filterOptions" onchange="applyFilter()" style="display: none;"></select>
+        <button onclick="clearFilter()" class="warning"><i class="ri-filter-off-line"></i> Annuler le filtre</button>
+        <label style="margin-left: 20px;">
+            <input type="checkbox" id="showFilledOnly" onclick="toggleFilledRows()"> 
+            Afficher uniquement les lignes remplies
+        </label>
+    </div>
+    
+    <div id="progressBar"><div></div></div>
+    <div id="presenceBar"></div>
+    <div class="table-container accent">
+        <div id="output"></div>
+    </div>
+</div>
+
+    <!-- Bouton retour à l'accueil -->
+    <a href="/" style="position: fixed; top: 20px; left: 20px; z-index: 10000; background: white; padding: 12px 20px; border-radius: 10px; text-decoration: none; color: #667eea; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+        <i class="ri-home-line"></i> Accueil
+    </a>
+<script defer src="js/distribution.js"></script>
+</body>
+</html>
