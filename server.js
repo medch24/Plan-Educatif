@@ -8,6 +8,7 @@ const { connectDB } = require('./config/database');
 
 // Import des routes modulaires
 const distributionRoutes = require('./api/distribution');
+const emploisRoutes = require('./api/emplois');
 const plansRoutes = require('./api/plans');
 const devoirsRoutes = require('./api/devoirs');
 const syncRoutes = require('./api/sync');
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 // Routes API modulaires
 app.use('/api/distribution', distributionRoutes);
+app.use('/api/emplois', emploisRoutes);
 app.use('/api/plans', plansRoutes);
 app.use('/api/devoirs', devoirsRoutes);
 app.use('/api/sync', syncRoutes);
@@ -44,7 +46,7 @@ app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'ok', 
         message: 'Système Scolaire Intégré fonctionnel',
-        modules: ['distribution', 'plans', 'devoirs'],
+        modules: ['distribution', 'emplois', 'plans', 'devoirs'],
         timestamp: new Date().toISOString()
     });
 });
@@ -75,6 +77,7 @@ async function startServer() {
             console.log(`📍 URL: http://localhost:${PORT}`);
             console.log(`📊 Modules actifs:`);
             console.log(`   - Distribution Annuelle: http://localhost:${PORT}/distribution.html`);
+            console.log(`   - Emplois du Temps: http://localhost:${PORT}/emplois.html`);
             console.log(`   - Plans Hebdomadaires: http://localhost:${PORT}/plans.html`);
             console.log(`   - Devoirs: http://localhost:${PORT}/devoirs.html`);
             console.log(`\n✅ Système prêt à l'utilisation\n`);

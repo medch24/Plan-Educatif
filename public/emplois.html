@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emplois du Temps - Secondaire Garçons</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/emplois.css">
+</head>
+<body>
+    <!-- Bouton retour -->
+    <a href="/" class="back-button">
+        <i class="ri-home-line"></i> Accueil
+    </a>
+
+    <div class="container">
+        <header class="page-header">
+            <img src="images/logo-ecole.png" alt="Logo" class="logo" onerror="this.style.display='none'">
+            <h1><i class="ri-calendar-schedule-line"></i> Emplois du Temps</h1>
+            <p class="subtitle">Organisation des périodes et séances - Section Secondaire Garçons</p>
+        </header>
+
+        <!-- Sélection de classe -->
+        <div class="class-selector">
+            <label for="classeSelect"><i class="ri-group-line"></i> Classe :</label>
+            <select id="classeSelect" onchange="loadEmploi()">
+                <option value="">-- Sélectionner une classe --</option>
+                <option value="PEI1-G">PEI1 Garçons</option>
+                <option value="PEI2-G">PEI2 Garçons</option>
+                <option value="PEI3-G">PEI3 Garçons</option>
+                <option value="PEI4-G">PEI4 Garçons</option>
+                <option value="DP2-G">DP2 Garçons</option>
+            </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-bar">
+            <button onclick="saveEmploi()" class="btn btn-primary">
+                <i class="ri-save-line"></i> Enregistrer
+            </button>
+            <button onclick="resetEmploi()" class="btn btn-warning">
+                <i class="ri-refresh-line"></i> Réinitialiser
+            </button>
+            <button onclick="exportExcel()" class="btn btn-success">
+                <i class="ri-file-excel-line"></i> Exporter Excel
+            </button>
+            <button onclick="printEmploi()" class="btn btn-info">
+                <i class="ri-printer-line"></i> Imprimer
+            </button>
+        </div>
+
+        <!-- Aide -->
+        <div class="help-box">
+            <i class="ri-information-line"></i>
+            <strong>Instructions :</strong>
+            <ul>
+                <li>Sélectionnez une classe pour voir son emploi du temps</li>
+                <li>Cliquez sur une cellule pour la modifier</li>
+                <li>Les pauses sont automatiquement gérées</li>
+                <li>Enregistrez pour sauvegarder les modifications</li>
+            </ul>
+        </div>
+
+        <!-- Tableau emploi du temps -->
+        <div id="emploiContainer" class="emploi-container">
+            <p class="empty-state">
+                <i class="ri-calendar-line"></i>
+                Sélectionnez une classe pour afficher l'emploi du temps
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal d'édition -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier la Séance</h3>
+                <button onclick="closeModal()" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Matière :</label>
+                    <input type="text" id="editMatiere" list="matieresDatalist">
+                    <datalist id="matieresDatalist"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>Enseignant :</label>
+                    <input type="text" id="editEnseignant" list="enseignantsDatalist">
+                    <datalist id="enseignantsDatalist"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>Salle :</label>
+                    <input type="text" id="editSalle">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="saveEdit()" class="btn btn-primary">Enregistrer</button>
+                <button onclick="closeModal()" class="btn btn-secondary">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="js/emplois.js"></script>
+</body>
+</html>

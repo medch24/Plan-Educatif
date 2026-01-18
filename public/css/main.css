@@ -116,6 +116,10 @@ body {
     background: linear-gradient(135deg, var(--info-color), #2563eb);
 }
 
+.module-card.emplois::before {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
 .module-card.devoirs::before {
     background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
 }
@@ -141,6 +145,10 @@ body {
 
 .module-card.plans .module-icon {
     color: var(--info-color);
+}
+
+.module-card.emplois .module-icon {
+    color: #8b5cf6;
 }
 
 .module-card.devoirs .module-icon {
@@ -205,6 +213,10 @@ body {
 
 .module-card.plans .module-button {
     background: linear-gradient(135deg, var(--info-color), #2563eb);
+}
+
+.module-card.emplois .module-button {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 }
 
 .module-card.devoirs .module-button {

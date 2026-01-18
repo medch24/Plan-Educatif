@@ -22,7 +22,7 @@
             <p class="subtitle">Année scolaire 2025-2026</p>
         </header>
 
-        <!-- Section principale avec les 3 modules -->
+        <!-- Section principale avec les 4 modules -->
         <main class="modules-grid">
             <!-- Module 1: Distribution Annuelle -->
             <div class="module-card distribution">
@@ -58,7 +58,41 @@
                 </a>
             </div>
 
-            <!-- Module 2: Plans Hebdomadaires -->
+            <!-- Module 2: Emplois du Temps -->
+            <div class="module-card emplois">
+                <div class="module-icon">
+                    <i class="ri-calendar-schedule-line"></i>
+                </div>
+                <h2 class="module-title">Emplois du Temps</h2>
+                <p class="module-description">
+                    Organisation des périodes et séances par jour et par matière.
+                    Base pour la génération des plans hebdomadaires.
+                </p>
+                <div class="module-features">
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Organisation par jour et période</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Affectation enseignants/matières</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Section Secondaire Garçons</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Export et impression</span>
+                    </div>
+                </div>
+                <a href="emplois.html" class="module-button">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    Accéder au module
+                </a>
+            </div>
+
+            <!-- Module 3: Plans Hebdomadaires -->
             <div class="module-card plans">
                 <div class="module-icon">
                     <i class="ri-calendar-check-line"></i>
@@ -92,7 +126,7 @@
                 </a>
             </div>
 
-            <!-- Module 3: Devoirs -->
+            <!-- Module 4: Devoirs -->
             <div class="module-card devoirs">
                 <div class="module-icon">
                     <i class="ri-file-list-3-line"></i>
@@ -133,14 +167,21 @@
                 <div class="sync-icon">
                     <i class="ri-refresh-line"></i>
                 </div>
-                <h3>Synchronisation Automatique</h3>
+                <h3>Flux de Travail Intégré</h3>
                 <p class="sync-description">
-                    Les trois modules sont interconnectés pour garantir la cohérence des données :
+                    Les quatre modules sont interconnectés pour garantir la cohérence des données :
                 </p>
                 <div class="sync-flow">
                     <div class="flow-step">
                         <i class="ri-calendar-2-fill"></i>
                         <span>Distribution Annuelle</span>
+                    </div>
+                    <div class="flow-arrow">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                    <div class="flow-step">
+                        <i class="ri-calendar-schedule-fill"></i>
+                        <span>Emplois du Temps</span>
                     </div>
                     <div class="flow-arrow">
                         <i class="ri-arrow-right-line"></i>
@@ -160,15 +201,19 @@
                 <ul class="sync-features">
                     <li>
                         <i class="ri-check-line"></i>
-                        Les données de la Distribution Annuelle sont <strong>automatiquement copiées</strong> vers les Plans Hebdomadaires
+                        La <strong>Distribution Annuelle</strong> définit les matières et contenus par semaine
                     </li>
                     <li>
                         <i class="ri-check-line"></i>
-                        Les enseignants peuvent <strong>modifier les plans</strong> sans affecter la distribution de base
+                        L'<strong>Emploi du Temps</strong> organise les périodes/séances par jour (Section Secondaire)
                     </li>
                     <li>
                         <i class="ri-check-line"></i>
-                        Les Devoirs sont <strong>mis à jour quotidiennement</strong> en fonction des plans hebdomadaires
+                        Les <strong>Plans Hebdomadaires</strong> combinent Distribution + Emplois (modifiables par enseignants)
+                    </li>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        Les <strong>Devoirs</strong> sont générés automatiquement depuis les Plans
                     </li>
                 </ul>
             </div>
