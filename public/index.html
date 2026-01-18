@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système Scolaire Intégré 2025-2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="white"/><path d="M16 96l112-40 112 40-112 40z" fill="%232563eb"/></svg>' type="image/svg+xml">
+</head>
+<body>
+    <div class="container">
+        <!-- Header principal -->
+        <header class="main-header">
+            <div class="logo-container">
+                <img src="images/logo-ecole.png" alt="Logo de l'école" class="logo" onerror="this.style.display='none'">
+            </div>
+            <h1 class="main-title">
+                <i class="ri-school-line"></i>
+                Système Scolaire Intégré
+            </h1>
+            <p class="subtitle">Année scolaire 2025-2026</p>
+        </header>
+
+        <!-- Section principale avec les 3 modules -->
+        <main class="modules-grid">
+            <!-- Module 1: Distribution Annuelle -->
+            <div class="module-card distribution">
+                <div class="module-icon">
+                    <i class="ri-calendar-2-line"></i>
+                </div>
+                <h2 class="module-title">Distribution Annuelle</h2>
+                <p class="module-description">
+                    Planification annuelle des matières par semaine, classe et enseignant. 
+                    Base de données centrale pour tous les autres modules.
+                </p>
+                <div class="module-features">
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Gestion par semaine (1-31)</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Support Maternelle, Primaire, Secondaire</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Export Excel/Word</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>IA Gemini pour génération automatique</span>
+                    </div>
+                </div>
+                <a href="distribution.html" class="module-button">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    Accéder au module
+                </a>
+            </div>
+
+            <!-- Module 2: Plans Hebdomadaires -->
+            <div class="module-card plans">
+                <div class="module-icon">
+                    <i class="ri-calendar-check-line"></i>
+                </div>
+                <h2 class="module-title">Plans Hebdomadaires</h2>
+                <p class="module-description">
+                    Plans hebdomadaires détaillés synchronisés automatiquement avec la distribution annuelle.
+                    Section Garçons avec modifications personnalisables.
+                </p>
+                <div class="module-features">
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Synchronisation auto depuis Distribution</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Modifications par enseignants</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Section Garçons uniquement</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Génération IA de plans de leçons</span>
+                    </div>
+                </div>
+                <a href="plans.html" class="module-button">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    Accéder au module
+                </a>
+            </div>
+
+            <!-- Module 3: Devoirs -->
+            <div class="module-card devoirs">
+                <div class="module-icon">
+                    <i class="ri-file-list-3-line"></i>
+                </div>
+                <h2 class="module-title">Suivi des Devoirs</h2>
+                <p class="module-description">
+                    Gestion et suivi quotidien des devoirs, liés aux plans hebdomadaires.
+                    Mise à jour journalière pour la section Garçons.
+                </p>
+                <div class="module-features">
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Liaison avec Plans Hebdomadaires</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Suivi par élève et par jour</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Évaluation et notation</span>
+                    </div>
+                    <div class="feature">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <span>Interface Parents & Enseignants</span>
+                    </div>
+                </div>
+                <a href="devoirs.html" class="module-button">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    Accéder au module
+                </a>
+            </div>
+        </main>
+
+        <!-- Section d'information sur la synchronisation -->
+        <section class="sync-info">
+            <div class="sync-card">
+                <div class="sync-icon">
+                    <i class="ri-refresh-line"></i>
+                </div>
+                <h3>Synchronisation Automatique</h3>
+                <p class="sync-description">
+                    Les trois modules sont interconnectés pour garantir la cohérence des données :
+                </p>
+                <div class="sync-flow">
+                    <div class="flow-step">
+                        <i class="ri-calendar-2-fill"></i>
+                        <span>Distribution Annuelle</span>
+                    </div>
+                    <div class="flow-arrow">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                    <div class="flow-step">
+                        <i class="ri-calendar-check-fill"></i>
+                        <span>Plans Hebdomadaires</span>
+                    </div>
+                    <div class="flow-arrow">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                    <div class="flow-step">
+                        <i class="ri-file-list-3-fill"></i>
+                        <span>Devoirs</span>
+                    </div>
+                </div>
+                <ul class="sync-features">
+                    <li>
+                        <i class="ri-check-line"></i>
+                        Les données de la Distribution Annuelle sont <strong>automatiquement copiées</strong> vers les Plans Hebdomadaires
+                    </li>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        Les enseignants peuvent <strong>modifier les plans</strong> sans affecter la distribution de base
+                    </li>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        Les Devoirs sont <strong>mis à jour quotidiennement</strong> en fonction des plans hebdomadaires
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>&copy; 2025-2026 Système Scolaire Intégré - Tous droits réservés</p>
+            <p class="version">Version 1.0.0 - Système unifié</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
