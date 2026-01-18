@@ -5,8 +5,8 @@
 Système unifié de gestion scolaire qui intègre trois modules interconnectés :
 
 1. **Distribution Annuelle** : Planification annuelle des matières
-2. **Plans Hebdomadaires** : Plans hebdomadaires détaillés (Sections Filles & Garçons)
-3. **Devoirs** : Suivi quotidien des devoirs (Sections Filles & Garçons)
+2. **Plans Hebdomadaires** : Plans hebdomadaires détaillés (Section Garçons)
+3. **Devoirs** : Suivi quotidien des devoirs (Section Garçons)
 
 ## 🏗️ Architecture
 
@@ -38,9 +38,9 @@ systeme-scolaire-integre/
 ```
 Distribution Annuelle (Données de base)
     ↓ (Synchronisation automatique)
-Plans Hebdomadaires (Filles & Garçons)
+Plans Hebdomadaires (Garçons)
     ↓ (Mise à jour journalière)
-Devoirs (Filles & Garçons)
+Devoirs (Garçons)
 ```
 
 ### Points importants :
@@ -114,7 +114,7 @@ Le serveur démarre sur `http://localhost:3000`
 - URL : `http://localhost:3000/plans.html`
 - Fonctionnalités :
   - Plans synchronisés depuis Distribution
-  - Sections Filles & Garçons séparées
+  - Sections Garçons séparées
   - Modifications personnalisables par enseignants
   - Génération de plans de leçons IA
 
@@ -180,16 +180,16 @@ GET    /api/sync/health
 - Données de la distribution annuelle
 - Champs : Semaine, Classe, Matière, Enseignant, Séance, Contenu, Pages Manuel, Pages Cahier
 
-#### `plans_filles` / `plans_garcons`
-- Plans hebdomadaires par section
+#### `plans_garcons`
+- Plans hebdomadaires (garçons uniquement)
 - Champs : semaine, classe, matiere, enseignant, seance, contenu, jour, modifie, date_sync, date_modification
 
-#### `devoirs_filles` / `devoirs_garcons`
-- Devoirs par section
+#### `devoirs_garcons`
+- Devoirs (garçons uniquement)
 - Champs : semaine, classe, matiere, enseignant, jour, date, contenu_devoir, type_devoir, statut, evaluations
 
-#### `eleves_filles` / `eleves_garcons`
-- Liste des élèves par section
+#### `eleves_garcons`
+- Liste des élèves (garçons uniquement)
 - Champs : nom, prenom, classe, photo_url
 
 ## 🔧 Maintenance
@@ -235,7 +235,7 @@ PORT=3001
    - Marque `modifie: true` pour tracer les changements
 
 3. **Sections** :
-   - Filles et Garçons ont des collections séparées
+   - Section Garçons uniquement
    - Permet une gestion indépendante
    - Synchronisation possible pour les deux sections simultanément
 

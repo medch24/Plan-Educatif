@@ -3,13 +3,13 @@ const router = express.Router();
 const { getDB } = require('../config/database');
 
 /**
- * Synchronisation : Distribution Annuelle → Plans Hebdomadaires
+ * Synchronisation : Distribution Annuelle → Plans Hebdomadaires (garçons uniquement)
  * Copie automatique des données de distribution vers les plans hebdo
  */
 router.post('/distribution-to-plans', async (req, res) => {
     try {
         const db = getDB();
-        const { semaine, classe, section } = req.body; // section: 'filles' ou 'garcons'
+        const { semaine, classe, section } = req.body; // section sera toujours 'garcons'
         
         // Récupérer les données de la distribution pour cette semaine/classe
         const distributionData = await db.collection('distribution')
@@ -43,8 +43,8 @@ router.post('/distribution-to-plans', async (req, res) => {
             date_modification: null
         }));
         
-        // Déterminer la collection cible
-        const targetCollection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const targetCollection = 'plans_garcons';
         
         // Supprimer les anciennes données pour cette semaine/classe avant d'insérer
         await db.collection(targetCollection).deleteMany({
@@ -75,7 +75,7 @@ router.post('/distribution-to-plans', async (req, res) => {
 });
 
 /**
- * Synchronisation : Plans Hebdomadaires → Devoirs
+ * Synchronisation : Plans Hebdomadaires → Devoirs (garçons uniquement)
  * Mise à jour journalière des devoirs basée sur les plans
  */
 router.post('/plans-to-devoirs', async (req, res) => {
@@ -83,8 +83,8 @@ router.post('/plans-to-devoirs', async (req, res) => {
         const db = getDB();
         const { semaine, classe, jour, section } = req.body;
         
-        // Récupérer les plans pour cette semaine/classe/jour
-        const sourceCollection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const sourceCollection = 'plans_garcons';
         const plansData = await db.collection(sourceCollection)
             .find({
                 semaine: semaine,
@@ -117,8 +117,8 @@ router.post('/plans-to-devoirs', async (req, res) => {
             evaluations: [] // Sera rempli par les enseignants
         }));
         
-        // Collection cible
-        const targetCollection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const targetCollection = 'devoirs_garcons';
         
         // Vérifier si des devoirs existent déjà pour ce jour
         const existingDevoirs = await db.collection(targetCollection).find({
@@ -175,11 +175,11 @@ router.post('/plans-to-devoirs', async (req, res) => {
 });
 
 /**
- * Synchronisation complète pour une semaine
+ * Synchronisation complète pour une semaine (garçons uniquement)
  */
 router.post('/sync-week', async (req, res) => {
     try {
-        const { semaine, section } = req.body; // section: 'filles', 'garcons', ou 'toutes'
+        const { semaine, section } = req.body; // section sera toujours 'garcons'
         
         const db = getDB();
         
@@ -192,7 +192,8 @@ router.post('/sync-week', async (req, res) => {
             plans_to_devoirs: []
         };
         
-        const sections = section === 'toutes' ? ['filles', 'garcons'] : [section];
+        // Toujours garcons uniquement
+        const sections = ['garcons'];
         
         // Pour chaque section
         for (const sec of sections) {

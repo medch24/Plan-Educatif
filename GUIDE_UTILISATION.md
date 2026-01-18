@@ -36,7 +36,7 @@
 
 **Fonctionnalités** :
 - ✅ Synchronisation automatique depuis Distribution Annuelle
-- ✅ Sections séparées : Filles et Garçons
+- ✅ Sections séparées : Garçons
 - ✅ Connexion par enseignant (nom d'utilisateur = mot de passe)
 - ✅ Modification personnalisée des plans (sans affecter la distribution de base)
 - ✅ Filtres par : Enseignant, Classe, Matière, Période, Jour
@@ -63,7 +63,7 @@
 
 **Fonctionnalités** :
 - ✅ Deux espaces : Parent et Enseignant
-- ✅ Sections séparées : Filles et Garçons
+- ✅ Sections séparées : Garçons
 - ✅ Suivi quotidien des devoirs par élève
 - ✅ Évaluation avec notation par étoiles
 - ✅ Statistiques de progression
@@ -200,6 +200,6 @@ Pour toute question ou problème :
 
 1. **Toujours commencer par la Distribution Annuelle** avant de remplir les autres modules
 2. **Les modifications des plans par les enseignants ne modifient pas la distribution de base**
-3. **Les données des sections Filles et Garçons sont séparées**
+3. **Les données des sections Garçons sont séparées**
 4. **Sauvegarder régulièrement** pour éviter la perte de données
 5. **Utiliser les exports Excel/Word** pour les archives

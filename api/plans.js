@@ -3,7 +3,7 @@ const router = express.Router();
 const { getDB } = require('../config/database');
 
 /**
- * Obtenir les plans hebdomadaires pour une semaine et section
+ * Obtenir les plans hebdomadaires pour une semaine (garçons uniquement)
  */
 router.get('/week/:weekNumber/:section', async (req, res) => {
     try {
@@ -11,7 +11,8 @@ router.get('/week/:weekNumber/:section', async (req, res) => {
         const { weekNumber, section } = req.params;
         const { classe, enseignant } = req.query;
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         const filter = { semaine: `Semaine ${weekNumber}` };
         if (classe) filter.classe = classe;
@@ -36,21 +37,22 @@ router.get('/week/:weekNumber/:section', async (req, res) => {
 });
 
 /**
- * Sauvegarder/Mettre à jour un plan hebdomadaire
+ * Sauvegarder/Mettre à jour un plan hebdomadaire (garçons uniquement)
  */
 router.post('/save', async (req, res) => {
     try {
         const db = getDB();
         const { section, plan } = req.body;
         
-        if (!section || !plan) {
+        if (!plan) {
             return res.status(400).json({
                 success: false,
                 message: 'Paramètres manquants'
             });
         }
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         // Marquer comme modifié par l'enseignant
         plan.modifie = true;
@@ -83,21 +85,22 @@ router.post('/save', async (req, res) => {
 });
 
 /**
- * Sauvegarder plusieurs plans en une seule fois
+ * Sauvegarder plusieurs plans en une seule fois (garçons uniquement)
  */
 router.post('/save-batch', async (req, res) => {
     try {
         const db = getDB();
         const { section, plans } = req.body;
         
-        if (!section || !plans || !Array.isArray(plans)) {
+        if (!plans || !Array.isArray(plans)) {
             return res.status(400).json({
                 success: false,
                 message: 'Paramètres invalides'
             });
         }
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         // Marquer tous comme modifiés
         const modifiedPlans = plans.map(plan => ({
@@ -135,14 +138,15 @@ router.post('/save-batch', async (req, res) => {
 });
 
 /**
- * Obtenir tous les enseignants
+ * Obtenir tous les enseignants (garçons uniquement)
  */
 router.get('/enseignants/:section', async (req, res) => {
     try {
         const db = getDB();
         const { section } = req.params;
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         const enseignants = await db.collection(collection)
             .distinct('enseignant');
@@ -158,14 +162,15 @@ router.get('/enseignants/:section', async (req, res) => {
 });
 
 /**
- * Obtenir toutes les classes pour une section
+ * Obtenir toutes les classes (garçons uniquement)
  */
 router.get('/classes/:section', async (req, res) => {
     try {
         const db = getDB();
         const { section } = req.params;
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         const classes = await db.collection(collection)
             .distinct('classe');
@@ -181,7 +186,7 @@ router.get('/classes/:section', async (req, res) => {
 });
 
 /**
- * Obtenir toutes les matières pour une section
+ * Obtenir toutes les matières (garçons uniquement)
  */
 router.get('/matieres/:section', async (req, res) => {
     try {
@@ -189,7 +194,8 @@ router.get('/matieres/:section', async (req, res) => {
         const { section } = req.params;
         const { classe } = req.query;
         
-        const collection = section === 'filles' ? 'plans_filles' : 'plans_garcons';
+        // Toujours utiliser plans_garcons
+        const collection = 'plans_garcons';
         
         const filter = classe ? { classe } : {};
         const matieres = await db.collection(collection)

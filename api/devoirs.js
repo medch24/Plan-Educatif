@@ -3,7 +3,7 @@ const router = express.Router();
 const { getDB } = require('../config/database');
 
 /**
- * Obtenir les devoirs pour une classe et section
+ * Obtenir les devoirs pour une classe (garçons uniquement)
  */
 router.get('/class/:className/:section', async (req, res) => {
     try {
@@ -11,7 +11,8 @@ router.get('/class/:className/:section', async (req, res) => {
         const { className, section } = req.params;
         const { semaine, jour } = req.query;
         
-        const collection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const collection = 'devoirs_garcons';
         
         const filter = { classe: className };
         if (semaine) filter.semaine = semaine;
@@ -34,7 +35,7 @@ router.get('/class/:className/:section', async (req, res) => {
 });
 
 /**
- * Obtenir les devoirs d'un élève
+ * Obtenir les devoirs d'un élève (garçons uniquement)
  */
 router.get('/student/:studentName/:section', async (req, res) => {
     try {
@@ -42,7 +43,8 @@ router.get('/student/:studentName/:section', async (req, res) => {
         const { studentName, section } = req.params;
         const { classe, semaine } = req.query;
         
-        const collection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const collection = 'devoirs_garcons';
         
         const filter = { classe };
         if (semaine) filter.semaine = semaine;
@@ -73,21 +75,22 @@ router.get('/student/:studentName/:section', async (req, res) => {
 });
 
 /**
- * Sauvegarder/Mettre à jour un devoir
+ * Sauvegarder/Mettre à jour un devoir (garçons uniquement)
  */
 router.post('/save', async (req, res) => {
     try {
         const db = getDB();
         const { section, devoir } = req.body;
         
-        if (!section || !devoir) {
+        if (!devoir) {
             return res.status(400).json({
                 success: false,
                 message: 'Paramètres manquants'
             });
         }
         
-        const collection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const collection = 'devoirs_garcons';
         
         devoir.date_modification = new Date();
         
@@ -117,21 +120,22 @@ router.post('/save', async (req, res) => {
 });
 
 /**
- * Évaluer un devoir pour un élève
+ * Évaluer un devoir pour un élève (garçons uniquement)
  */
 router.post('/evaluate', async (req, res) => {
     try {
         const db = getDB();
         const { section, devoir_id, evaluation } = req.body;
         
-        if (!section || !devoir_id || !evaluation) {
+        if (!devoir_id || !evaluation) {
             return res.status(400).json({
                 success: false,
                 message: 'Paramètres manquants'
             });
         }
         
-        const collection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const collection = 'devoirs_garcons';
         
         // Ajouter ou mettre à jour l'évaluation
         const result = await db.collection(collection).updateOne(
@@ -182,7 +186,7 @@ router.post('/sync-from-plans', async (req, res) => {
 });
 
 /**
- * Obtenir les statistiques des devoirs pour une classe
+ * Obtenir les statistiques des devoirs pour une classe (garçons uniquement)
  */
 router.get('/stats/:className/:section', async (req, res) => {
     try {
@@ -190,7 +194,8 @@ router.get('/stats/:className/:section', async (req, res) => {
         const { className, section } = req.params;
         const { semaine } = req.query;
         
-        const collection = section === 'filles' ? 'devoirs_filles' : 'devoirs_garcons';
+        // Toujours utiliser devoirs_garcons
+        const collection = 'devoirs_garcons';
         
         const filter = { classe: className };
         if (semaine) filter.semaine = semaine;
@@ -239,15 +244,15 @@ router.get('/stats/:className/:section', async (req, res) => {
 });
 
 /**
- * Obtenir les élèves d'une classe
+ * Obtenir les élèves d'une classe (garçons uniquement)
  */
 router.get('/students/:className/:section', async (req, res) => {
     try {
         const db = getDB();
         const { className, section } = req.params;
         
-        // Collection des élèves (à créer séparément)
-        const studentsCollection = section === 'filles' ? 'eleves_filles' : 'eleves_garcons';
+        // Toujours utiliser eleves_garcons
+        const studentsCollection = 'eleves_garcons';
         
         const students = await db.collection(studentsCollection)
             .find({ classe: className })
