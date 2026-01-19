@@ -1,13 +1,35 @@
 # Système Scolaire Intégré 2025-2026
 
+![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
+![Version](https://img.shields.io/badge/Version-2.1.0-blue)
+![Section](https://img.shields.io/badge/Section-Secondaire%20Garçons-orange)
+![Node](https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green)
+
 ## 📚 Description
 
 Système unifié de gestion scolaire qui intègre **quatre modules interconnectés** pour la **Section Secondaire Garçons** :
 
 1. **Distribution Annuelle** : Planification annuelle des matières (31 semaines)
-2. **Emplois du Temps** : Organisation hebdomadaire par jour/période
+2. **Emplois du Temps** : Organisation hebdomadaire par jour/période ⭐ **NOUVEAU**
 3. **Plans Hebdomadaires** : Plans détaillés générés automatiquement
 4. **Devoirs** : Suivi quotidien des devoirs et évaluations
+
+## 🚀 Quick Start
+
+```bash
+# Installation
+npm install
+
+# Configuration (optionnel)
+cp .env.example .env
+
+# Démarrage
+npm start
+
+# Accès
+# Page d'accueil: http://localhost:3000
+# Emplois du Temps: http://localhost:3000/emplois.html
+```
 
 ## 🏗️ Architecture
 

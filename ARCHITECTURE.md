@@ -1,435 +1,300 @@
 # 🏗️ Architecture du Système Scolaire Intégré
 
-## Vue d'Ensemble
+## Vue d'ensemble
 
-Le système est composé de **4 modules principaux** interconnectés qui gèrent l'ensemble du processus éducatif :
+Le système est composé de **4 modules** interconnectés qui gèrent l'ensemble du processus pédagogique pour la **Section Secondaire Garçons**.
+
+## 📊 Diagramme de flux
 
 ```
-┌──────────────────────┐
-│  Distribution        │
-│  Annuelle           │  ←─── Planification annuelle (semaines 1-31)
-└──────────┬───────────┘
+┌─────────────────────────────────┐
+│  1. Distribution Annuelle       │
+│  - Contenu pédagogique          │
+│  - 31 semaines                  │
+│  - Par matière/classe           │
+└──────────┬──────────────────────┘
            │
            ↓
-┌──────────────────────┐
-│  Emplois du Temps   │  ←─── Organisation hebdomadaire (jours/périodes)
-└──────────┬───────────┘
+┌─────────────────────────────────┐
+│  2. Emplois du Temps            │◄─── emplois_default.json
+│  - Structure horaire            │     (PEI1-G à DP2-G)
+│  - Jours × Périodes             │
+│  - Matières × Enseignants       │
+└──────────┬──────────────────────┘
            │
-           ↓
-┌──────────────────────┐
-│  Plans              │
-│  Hebdomadaires      │  ←─── Plans détaillés par séance
-└──────────┬───────────┘
+           ↓ Synchronisation automatique
            │
-           ↓
-┌──────────────────────┐
-│  Devoirs            │  ←─── Suivi quotidien et évaluation
-└──────────────────────┘
+┌─────────────────────────────────┐
+│  3. Plans Hebdomadaires         │
+│  - Distribution + Emplois       │
+│  - Modifiable par enseignants   │
+│  - Génération IA (optionnel)    │
+└──────────┬──────────────────────┘
+           │
+           ↓ Mise à jour quotidienne
+           │
+┌─────────────────────────────────┐
+│  4. Devoirs                     │
+│  - Suivi par élève/jour         │
+│  - Évaluations                  │
+│  - Interface Parents/Profs      │
+└─────────────────────────────────┘
 ```
-
----
-
-## 📚 Module 1 : Distribution Annuelle
-
-### Objectif
-Planifier l'ensemble des contenus pédagogiques pour l'année scolaire.
-
-### Structure de Données
-```json
-{
-  "Semaine": "Semaine 1",
-  "Classe": "PEI1-G",
-  "Matière": "Mathématiques",
-  "Enseignant": "Zine",
-  "Séance": "1",
-  "Contenu": "Nombres réels",
-  "Pages Manuel": "12-15",
-  "Pages Cahier": "5-7",
-  "Objectifs": "Comprendre les nombres réels",
-  "Compétences": "Calcul, raisonnement",
-  "Activités": "Exercices pratiques",
-  "Ressources": "Manuel, calculatrice",
-  "Évaluation": "Quiz"
-}
-```
-
-### Collection MongoDB
-- **Nom** : `distribution`
-- **Clés** : Semaine, Classe, Matière, Séance
-
-### Fonctionnalités
-- ✅ Gestion par semaine (1-31)
-- ✅ Section Secondaire Garçons uniquement
-- ✅ Export Excel/Word
-- ✅ Génération IA (Gemini)
-- ✅ Import Excel
-
----
-
-## 🗓️ Module 2 : Emplois du Temps
-
-### Objectif
-Organiser les matières par jour et période pour chaque classe.
-
-### Structure de Données
-```json
-{
-  "classe": "PEI1-G",
-  "jour": "Dimanche",
-  "periode": 1,
-  "horaire": "8:00 - 8:45",
-  "matiere": "Mathématiques",
-  "enseignant": "Zine",
-  "salle": "A101",
-  "type": "cours"
-}
-```
-
-### Collection MongoDB
-- **Nom** : `emplois_temps`
-- **Clés** : classe, jour, periode
-
-### Périodes Standard
-| Période | Horaire | Type |
-|---------|---------|------|
-| 1 | 8:00 - 8:45 | Cours |
-| 2 | 8:45 - 9:30 | Cours |
-| 3 | 9:30 - 10:15 | Cours |
-| **Pause 1** | **10:15 - 10:35** | **Pause** |
-| 4 | 10:35 - 11:15 | Cours |
-| 5 | 11:15 - 11:55 | Cours |
-| 6 | 11:55 - 12:35 | Cours |
-| 7 | 12:35 - 13:15 | Cours |
-| **Pause 2** | **13:15 - 13:45** | **Pause** |
-| 8 | 13:45 - 14:30 | Cours |
-
-### Fonctionnalités
-- ✅ Emplois par défaut (basés sur PDF fourni)
-- ✅ Modification par classe
-- ✅ Grille interactive éditable
-- ✅ Export Excel
-- ✅ Impression
-- ✅ Affectation enseignant/salle
-
-### Jours de la Semaine
-- Dimanche
-- Lundi
-- Mardi
-- Mercredi
-- Jeudi
-
----
-
-## 📖 Module 3 : Plans Hebdomadaires
-
-### Objectif
-Générer des plans détaillés pour chaque séance en combinant Distribution + Emplois du Temps.
-
-### Structure de Données
-```json
-{
-  "semaine": "Semaine 1",
-  "classe": "PEI1-G",
-  "matiere": "Mathématiques",
-  "enseignant": "Zine",
-  "jour": "Dimanche",
-  "periode": 1,
-  "horaire": "8:00 - 8:45",
-  "salle": "A101",
-  "contenu": "Nombres réels",
-  "pages_manuel": "12-15",
-  "pages_cahier": "5-7",
-  "objectifs": "Comprendre les nombres réels",
-  "competences": "Calcul, raisonnement",
-  "activites": "Exercices pratiques",
-  "ressources": "Manuel, calculatrice",
-  "evaluation": "Quiz",
-  "notes": "",
-  "modifie": false,
-  "date_sync": "2026-01-19T..."
-}
-```
-
-### Collection MongoDB
-- **Nom** : `plans_garcons`
-- **Clés** : semaine, classe, matiere, jour, periode
-
-### Génération Automatique
-Le système combine :
-1. **Emplois du Temps** → Structure (jour, période, horaire, enseignant)
-2. **Distribution** → Contenu pédagogique (objectifs, activités, ressources)
-
-### Fonctionnalités
-- ✅ Génération automatique depuis Emplois + Distribution
-- ✅ Modification par enseignants (sans affecter la source)
-- ✅ Génération IA de plans de leçons
-- ✅ Export Excel/Word
-- ✅ Filtres par classe/matière/semaine
-
----
-
-## 📝 Module 4 : Devoirs
-
-### Objectif
-Gérer les devoirs quotidiens et leur évaluation.
-
-### Structure de Données
-```json
-{
-  "semaine": "Semaine 1",
-  "classe": "PEI1-G",
-  "matiere": "Mathématiques",
-  "enseignant": "Zine",
-  "jour": "Dimanche",
-  "date": "2026-01-19T...",
-  "contenu_devoir": "Exercices page 15",
-  "type_devoir": "Quotidien",
-  "statut": "en_attente",
-  "evaluations": [
-    {
-      "eleve_id": "123",
-      "note": 18,
-      "commentaire": "Bon travail",
-      "date_evaluation": "2026-01-20T..."
-    }
-  ]
-}
-```
-
-### Collection MongoDB
-- **Nom** : `devoirs_garcons`
-- **Clés** : semaine, classe, matiere, jour
-
-### Fonctionnalités
-- ✅ Génération automatique depuis Plans Hebdo
-- ✅ Interface Parents (consultation)
-- ✅ Interface Enseignants (évaluation)
-- ✅ Statistiques par élève/classe
-- ✅ Suivi de progression
-
----
-
-## 🔄 Flux de Synchronisation
-
-### 1️⃣ Distribution → Emplois du Temps (Manuel)
-L'enseignant organise les matières par jour/période selon l'emploi du temps fourni.
-
-**API** : `POST /api/emplois/save`
-
-### 2️⃣ Emplois + Distribution → Plans Hebdomadaires (Automatique)
-Le système génère automatiquement les plans en combinant :
-- Structure horaire de l'emploi du temps
-- Contenu pédagogique de la distribution
-
-**API** : `POST /api/sync/emplois-to-plans`
-```json
-{
-  "classe": "PEI1-G",
-  "semaine": "Semaine 1"
-}
-```
-
-### 3️⃣ Plans Hebdomadaires → Devoirs (Automatique)
-Le système crée les devoirs quotidiens basés sur les plans.
-
-**API** : `POST /api/sync/plans-to-devoirs`
-```json
-{
-  "semaine": "Semaine 1",
-  "classe": "PEI1-G",
-  "jour": "Dimanche"
-}
-```
-
-### 4️⃣ Modifications par Enseignants
-Les enseignants peuvent modifier :
-- ✅ Plans Hebdomadaires (sans affecter Distribution)
-- ✅ Devoirs (évaluation, notes, commentaires)
-- ✅ Emplois du Temps (changement de période/salle)
-
----
 
 ## 🗄️ Structure MongoDB
 
-### Base de Données : `systeme_scolaire`
+### Base de données : `systeme_scolaire`
 
+#### Collections
+
+1. **distributions**
+   - Contenu pédagogique annuel
+   - Structure : `{ Semaine, Classe, Matière, Enseignant, Séance, Contenu, Pages, ... }`
+
+2. **emplois_temps**
+   - Organisation horaire
+   - Structure : `{ classe, jour, periode, horaire, matiere, enseignant, salle, type }`
+
+3. **plans_garcons**
+   - Plans hebdomadaires générés
+   - Structure : `{ Semaine, Classe, Matière, Enseignant, Jour, Période, Contenu, Modifié }`
+
+4. **devoirs_garcons**
+   - Devoirs quotidiens
+   - Structure : `{ Semaine, Classe, Matière, Jour, Contenu, Statut, Évaluations }`
+
+5. **eleves_garcons**
+   - Informations élèves
+   - Structure : `{ nom, prenom, classe, ... }`
+
+## 📋 Modules détaillés
+
+### Module 1 : Distribution Annuelle
+
+**URL**: `/distribution.html`
+
+**Fonctionnalités**:
+- Planning annuel 31 semaines
+- 5 classes : PEI1-G, PEI2-G, PEI3-G, PEI4-G, DP2-G
+- Export Excel/Word
+- Génération IA (Gemini)
+- Gestion par semaine/matière/enseignant
+
+**API**:
+- `GET /api/distribution/health` - Health check
+- `GET /api/distribution/classes` - Liste des classes
+- `POST /api/distribution/save` - Sauvegarder distribution
+- `GET /api/distribution/export` - Exporter Excel
+
+### Module 2 : Emplois du Temps
+
+**URL**: `/emplois.html`
+
+**Fonctionnalités**:
+- Organisation par jour (Dim-Jeu)
+- 8 périodes + 2 pauses (10:15-10:35, 13:15-13:45)
+- Horaires : 8:00 - 14:30
+- Affectation matière/enseignant/salle
+- Chargement emplois par défaut depuis JSON
+- Modification et sauvegarde
+
+**Emplois par défaut**:
+Fichier : `data/emplois_default.json`
+- PEI1-G : Emploi complet Dim-Jeu (8 périodes/jour)
+- PEI2-G : Emploi complet
+- PEI3-G : Emploi complet
+- PEI4-G : Emploi complet
+- DP2-G : Emploi complet
+
+**API**:
+- `GET /api/emplois/health` - Health check
+- `GET /api/emplois/classe/:className` - Charger emploi
+- `POST /api/emplois/save` - Sauvegarder emploi
+- `POST /api/emplois/load-default/:className` - Charger emploi par défaut
+- `GET /api/emplois/matieres/:className` - Liste matières
+- `GET /api/emplois/enseignants/:className` - Liste enseignants
+
+### Module 3 : Plans Hebdomadaires
+
+**URL**: `/plans.html`
+
+**Fonctionnalités**:
+- Synchronisation Distribution + Emplois
+- Plans hebdomadaires détaillés
+- Modification par enseignants
+- Génération plans de leçons IA
+- Export Word/Excel
+
+**Synchronisation**:
+```javascript
+Plans[semaine][classe][jour][période] = {
+  matiere: Emplois[classe][jour][période].matiere,
+  enseignant: Emplois[classe][jour][période].enseignant,
+  contenu: Distribution[semaine][classe][matiere].contenu
+}
 ```
-systeme_scolaire/
-├── distribution          # Distribution annuelle
-├── emplois_temps        # Emplois du temps
-├── plans_garcons        # Plans hebdomadaires garçons
-├── devoirs_garcons      # Devoirs garçons
-└── eleves_garcons       # Données élèves
-```
 
-### Standardisation des Colonnes
+**API**:
+- `GET /api/plans/health` - Health check
+- `GET /api/plans/semaine/:week/:section` - Charger plans
+- `POST /api/plans/save` - Sauvegarder plans
+- `POST /api/plans/generate-ai` - Générer plans IA
 
-#### Distribution
-- `Semaine`, `Classe`, `Matière`, `Enseignant`, `Séance`
-- `Contenu`, `Pages Manuel`, `Pages Cahier`
-- `Objectifs`, `Compétences`, `Activités`, `Ressources`, `Évaluation`
+### Module 4 : Devoirs
 
-#### Emplois du Temps
-- `classe`, `jour`, `periode`, `horaire`
-- `matiere`, `enseignant`, `salle`, `type`
+**URL**: `/devoirs.html`
 
-#### Plans Hebdomadaires
-- `semaine`, `classe`, `matiere`, `enseignant`
-- `jour`, `periode`, `horaire`, `salle`
-- `contenu`, `pages_manuel`, `pages_cahier`
-- `objectifs`, `competences`, `activites`, `ressources`, `evaluation`
-- `notes`, `modifie`, `date_sync`
+**Fonctionnalités**:
+- Génération automatique depuis Plans
+- Interface Parents : consultation devoirs
+- Interface Enseignants : ajout/modification
+- Évaluations et notes
+- Statistiques par élève/classe
 
-#### Devoirs
-- `semaine`, `classe`, `matiere`, `enseignant`, `jour`
-- `contenu_devoir`, `type_devoir`, `statut`
-- `evaluations[]` (array d'objets)
+**API**:
+- `GET /api/devoirs/health` - Health check
+- `GET /api/devoirs/semaine/:week/:section` - Charger devoirs
+- `POST /api/devoirs/save` - Sauvegarder devoirs
+- `GET /api/devoirs/eleve/:id` - Devoirs d'un élève
 
----
+## 🔌 API Synchronisation
 
-## 🎯 Classes Supportées (Section Secondaire Garçons)
+**Base URL**: `/api/sync`
 
-- **PEI1-G** : Programme d'Éducation Intermédiaire 1 Garçons
-- **PEI2-G** : Programme d'Éducation Intermédiaire 2 Garçons
-- **PEI3-G** : Programme d'Éducation Intermédiaire 3 Garçons
-- **PEI4-G** : Programme d'Éducation Intermédiaire 4 Garçons
-- **DP2-G** : Diplôme Programme 2 Garçons
+### Endpoints
 
----
+1. **Distribution → Plans**
+   ```
+   POST /api/sync/distribution-to-plans
+   Body: { semaine: 1, classe: 'PEI1-G' }
+   ```
 
-## 🔐 Sécurité et Permissions
+2. **Plans → Devoirs**
+   ```
+   POST /api/sync/plans-to-devoirs
+   Body: { semaine: 1, classe: 'PEI1-G' }
+   ```
 
-### Niveaux d'Accès
-1. **Administrateur** : Tous les modules
-2. **Enseignant** : Plans, Devoirs (sa classe uniquement)
-3. **Parent** : Devoirs (consultation uniquement)
-4. **Élève** : Devoirs (consultation uniquement)
+3. **Health check**
+   ```
+   GET /api/sync/health
+   ```
 
-### Traçabilité
-- `date_creation` : Date de création
-- `date_modification` : Date de dernière modification
-- `modifie` : Indicateur de modification manuelle
-- `source` : Source des données (`distribution`, `emploi_distribution`, `plan_hebdo`)
+## 🎨 Frontend
 
----
+### Technologies
+- HTML5 / CSS3 / JavaScript (Vanilla)
+- Remix Icons
+- XLSX.js (export Excel)
+- Docxtemplater (export Word)
+
+### Pages
+
+1. **index.html** : Page d'accueil avec navigation
+2. **distribution.html** : Module Distribution
+3. **emplois.html** : Module Emplois du Temps
+4. **plans.html** : Module Plans Hebdomadaires
+5. **devoirs.html** : Module Devoirs
+
+### Styles CSS modulaires
+
+- `main.css` : Styles communs
+- `distribution.css` : Styles Distribution
+- `emplois.css` : Styles Emplois
+- `plans.css` : Styles Plans
+- `devoirs.css` : Styles Devoirs
 
 ## 🚀 Déploiement
 
-### Variables d'Environnement (.env)
+### Prérequis
+- Node.js 18+
+- MongoDB 6+ (optionnel, mode démo sans DB)
+
+### Installation
+
+```bash
+# 1. Cloner le projet
+git clone https://github.com/medch24/Plan-Educatif.git
+cd Plan-Educatif
+
+# 2. Installer dépendances
+npm install
+
+# 3. Configuration
+cp .env.example .env
+# Éditer .env avec vos paramètres MongoDB, OpenAI, etc.
+
+# 4. Démarrer
+npm start
+```
+
+### Configuration .env
+
 ```env
 # MongoDB
 MONGODB_URI=mongodb://localhost:27017/systeme_scolaire
 
-# API Keys (Optionnel)
-GEMINI_API_KEY=your_gemini_api_key
-OPENAI_API_KEY=your_openai_api_key
+# OpenAI (optionnel, pour génération IA)
+OPENAI_API_KEY=sk-...
 
-# Serveur
+# Gemini (optionnel, pour génération IA)
+GEMINI_API_KEY=...
+
+# Port serveur
 PORT=3000
-NODE_ENV=production
 ```
 
-### Lancement
-```bash
-# Installation
-npm install
+## 📦 Dépendances
 
-# Développement
-npm run dev
-
-# Production
-npm start
+```json
+{
+  "express": "^4.19.2",
+  "mongodb": "^6.5.0",
+  "cors": "^2.8.5",
+  "dotenv": "^16.4.5",
+  "exceljs": "^4.4.0",
+  "openai": "^4.57.0",
+  "@google/generative-ai": "latest",
+  "docxtemplater": "^3.47.1",
+  "pizzip": "^3.1.6"
+}
 ```
 
-### URLs d'Accès
-- **Accueil** : http://localhost:3000
-- **Distribution** : http://localhost:3000/distribution.html
-- **Emplois** : http://localhost:3000/emplois.html
-- **Plans** : http://localhost:3000/plans.html
-- **Devoirs** : http://localhost:3000/devoirs.html
+## 🔐 Sécurité
+
+- Variables d'environnement dans `.env`
+- Validation des entrées utilisateur
+- Protection CORS
+- Gestion des erreurs
+
+## 📈 Évolutions futures
+
+- [ ] Authentification utilisateurs (JWT)
+- [ ] Notifications push
+- [ ] Application mobile (React Native)
+- [ ] Système de messagerie interne
+- [ ] Rapports et statistiques avancés
+- [ ] Integration avec systèmes externes (LMS, etc.)
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit (`git commit -m 'Add AmazingFeature'`)
+4. Push (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📝 Licence
+
+MIT License - voir fichier [LICENSE](LICENSE)
+
+## 👥 Équipe
+
+- **Développement** : GenSpark AI Developer
+- **Client** : École Al-Kawthar International Schools
+- **Année** : 2025-2026
 
 ---
 
-## 📊 Workflow Complet
-
-### Étape 1 : Configuration Initiale
-1. Remplir la **Distribution Annuelle** pour les 31 semaines
-2. Charger les **Emplois du Temps par défaut** pour chaque classe
-3. Vérifier et ajuster les emplois si nécessaire
-
-### Étape 2 : Génération Hebdomadaire
-1. Sélectionner la semaine courante
-2. Lancer la synchronisation `Emplois + Distribution → Plans`
-3. Les plans sont générés automatiquement
-
-### Étape 3 : Personnalisation
-1. Les enseignants consultent leurs plans
-2. Modifications possibles (notes, activités supplémentaires)
-3. Sauvegarde des modifications
-
-### Étape 4 : Devoirs Quotidiens
-1. Synchronisation automatique `Plans → Devoirs`
-2. Les devoirs sont créés pour chaque jour
-3. Les enseignants évaluent les devoirs
-
-### Étape 5 : Suivi
-1. Parents et élèves consultent les devoirs
-2. Statistiques de progression
-3. Élève de la semaine
-
----
-
-## 🛠️ API Endpoints
-
-### Distribution
-- `GET /api/distribution/week/:weekNumber`
-- `POST /api/distribution/save`
-- `GET /api/distribution/export-excel`
-
-### Emplois du Temps
-- `GET /api/emplois/classe/:className`
-- `POST /api/emplois/save`
-- `POST /api/emplois/load-default/:className`
-
-### Plans Hebdomadaires
-- `GET /api/plans/week/:weekNumber/:section`
-- `POST /api/plans/save`
-- `POST /api/plans/generate-from-emplois`
-
-### Devoirs
-- `GET /api/devoirs/week/:weekNumber/:section`
-- `POST /api/devoirs/save`
-- `POST /api/devoirs/evaluate`
-
-### Synchronisation
-- `POST /api/sync/emplois-to-plans`
-- `POST /api/sync/plans-to-devoirs`
-- `POST /api/sync/sync-week`
-
----
-
-## 📝 Notes Importantes
-
-### ✅ Points Forts
-1. **Automatisation** : Génération automatique des plans et devoirs
-2. **Flexibilité** : Modifications possibles sans affecter la source
-3. **Traçabilité** : Historique complet des modifications
-4. **Section Unique** : Garçons uniquement (simplifié)
-
-### ⚠️ Limitations Actuelles
-1. Nécessite MongoDB configuré pour la persistance
-2. Mode démo disponible sans MongoDB
-3. Emplois par défaut doivent être chargés manuellement
-
-### 🔮 Améliorations Futures
-1. Système d'authentification complet
-2. Notifications push pour les devoirs
-3. Application mobile
-4. Génération automatique complète avec IA
-
----
-
-**Version** : 2.0  
-**Date** : 19 janvier 2026  
-**Section** : Secondaire Garçons  
-**Statut** : ✅ Production Ready
+**Version** : 2.0.0  
+**Dernière mise à jour** : 2026-01-19
