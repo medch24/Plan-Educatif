@@ -56,6 +56,36 @@ async function loadEmploi() {
     }
 }
 
+// Charger l'emploi par défaut dans la base
+async function loadDefaultEmploi() {
+    if (!currentClasse) {
+        showNotification('Veuillez d\'abord sélectionner une classe', 'warning');
+        return;
+    }
+    
+    if (!confirm(`Charger l'emploi par défaut pour ${currentClasse} ?\n\nCela écrasera l'emploi actuel s'il existe.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/emplois/load-default/${currentClasse}`, {
+            method: 'POST'
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Emploi par défaut chargé avec succès !', 'success');
+            await loadEmploi(); // Recharger l'affichage
+        } else {
+            showNotification(data.message || 'Erreur lors du chargement', 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors du chargement de l\'emploi par défaut', 'error');
+    }
+}
+
 // Afficher l'emploi du temps
 function displayEmploi() {
     const container = document.getElementById('emploiContainer');

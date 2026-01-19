@@ -1,0 +1,262 @@
+{
+  "PEI1-G": {
+    "Dimanche": [
+      {"matiere": "Sciences", "enseignant": "Zine"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"},
+      {"matiere": "Easy Arabic", "enseignant": "Imad"},
+      {"matiere": "Anglais", "enseignant": "Kamel"}
+    ],
+    "Lundi": [
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Easy Arabic", "enseignant": "Imad"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"}
+    ],
+    "Mardi": [
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Sciences", "enseignant": "Zine"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "ART", "enseignant": "Sami"},
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"}
+    ],
+    "Mercredi": [
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Sciences", "enseignant": "Zine"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Sciences", "enseignant": "Zine"},
+      {"matiere": "Library", "enseignant": "Youssif"},
+      {"matiere": "IS", "enseignant": "Youssif"}
+    ],
+    "Jeudi": [
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Music", "enseignant": "Sami"},
+      {"matiere": "Sciences", "enseignant": "Zine"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "KSA", "enseignant": "Jaber"},
+      {"matiere": "Anglais", "enseignant": "Kamel"}
+    ]
+  },
+  "PEI2-G": {
+    "Dimanche": [
+      {"matiere": "Islamic", "enseignant": "Jaber"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Physique chimie", "enseignant": "Tonga"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "French L.L", "enseignant": "Abas"}
+    ],
+    "Lundi": [
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Islamic", "enseignant": "Jaber"},
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Islamic", "enseignant": "Jaber"}
+    ],
+    "Mardi": [
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "ART", "enseignant": "Sami"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "French L.L", "enseignant": "Abas"}
+    ],
+    "Mercredi": [
+      {"matiere": "Music", "enseignant": "Sami"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Islamic", "enseignant": "Jaber"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Physique chimie", "enseignant": "Tonga"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "KSA", "enseignant": "Jaber"}
+    ],
+    "Jeudi": [
+      {"matiere": "Islamic", "enseignant": "Jaber"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Library", "enseignant": "Youssif"},
+      {"matiere": "Physique chimie", "enseignant": "Tonga"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "KSA", "enseignant": "Jaber"}
+    ]
+  },
+  "PEI3-G": {
+    "Dimanche": [
+      {"matiere": "ART", "enseignant": "Sami"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Physique chimie", "enseignant": "Tonga"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "KSA", "enseignant": "Jaber"}
+    ],
+    "Lundi": [
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy Arabic", "enseignant": "Jaber"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Physique chimie", "enseignant": "Tonga"},
+      {"matiere": "Islamic", "enseignant": "Majed"}
+    ],
+    "Mardi": [
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Music", "enseignant": "Sami"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"}
+    ],
+    "Mercredi": [
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy Arabic", "enseignant": "Jaber"},
+      {"matiere": "IS", "enseignant": "Youssif"}
+    ],
+    "Jeudi": [
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Library", "enseignant": "Youssif"},
+      {"matiere": "KSA", "enseignant": "Jaber"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "French L.L", "enseignant": "Abas"}
+    ]
+  },
+  "PEI4-G": {
+    "Dimanche": [
+      {"matiere": "KSA", "enseignant": "Jaber"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Physique chimie", "enseignant": "Sylvano Hervé"},
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"},
+      {"matiere": "Islamic", "enseignant": "Majed"}
+    ],
+    "Lundi": [
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "ART", "enseignant": "Sami"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy arabic", "enseignant": "Jaber"},
+      {"matiere": "Physique chimie", "enseignant": "Sylvano Hervé"},
+      {"matiere": "IS", "enseignant": "Youssif"}
+    ],
+    "Mardi": [
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Physique chimie", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "KSA", "enseignant": "Jaber"}
+    ],
+    "Mercredi": [
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy arabic", "enseignant": "Jaber"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "French L.L", "enseignant": "Abas"}
+    ],
+    "Jeudi": [
+      {"matiere": "Design", "enseignant": "Tonga"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Maths", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Library", "enseignant": "Youssif"},
+      {"matiere": "Physique chimie", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Islamic", "enseignant": "Majed"}
+    ]
+  },
+  "DP2-G": {
+    "Dimanche": [
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Physique chimie", "enseignant": "Mohamed"},
+      {"matiere": "Maths", "enseignant": "Tonga"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Tonga"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Islamic", "enseignant": "Majed"}
+    ],
+    "Lundi": [
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Tonga"},
+      {"matiere": "ART", "enseignant": "Sami"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Physique chimie", "enseignant": "Mohamed"},
+      {"matiere": "ES", "enseignant": "Sylvano Hervé"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "History", "enseignant": "Jaber"}
+    ],
+    "Mardi": [
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "ES", "enseignant": "Zine"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy Arabic", "enseignant": "Jaber"},
+      {"matiere": "Physique chimie", "enseignant": "Mohamed"},
+      {"matiere": "Maths", "enseignant": "Tonga"},
+      {"matiere": "Islamic", "enseignant": "Majed"}
+    ],
+    "Mercredi": [
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Physique chimie", "enseignant": "Mohamed"},
+      {"matiere": "SES", "enseignant": "Youssif"},
+      {"matiere": "Islamic", "enseignant": "Majed"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "Easy Arabic", "enseignant": "Jaber"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Maths", "enseignant": "Tonga"}
+    ],
+    "Jeudi": [
+      {"matiere": "P.E", "enseignant": "Mohamed Ali"},
+      {"matiere": "Anglais", "enseignant": "Kamel"},
+      {"matiere": "Arabic", "enseignant": "Saeed Sulami"},
+      {"matiere": "French L.L", "enseignant": "Abas"},
+      {"matiere": "Biologie", "enseignant": "Zine"},
+      {"matiere": "Library", "enseignant": "Youssif"},
+      {"matiere": "IS", "enseignant": "Youssif"},
+      {"matiere": "Maths", "enseignant": "Tonga"}
+    ]
+  }
+}
