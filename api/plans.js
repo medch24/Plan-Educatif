@@ -235,6 +235,105 @@ router.post('/sync-from-distribution', async (req, res) => {
 });
 
 /**
+ * Générer plans à partir de Distribution + Emplois du Temps
+ */
+router.post('/generate-from-emplois', async (req, res) => {
+    try {
+        const db = getDB();
+        const { classe, semaine } = req.body;
+        
+        if (!classe || !semaine) {
+            return res.status(400).json({
+                success: false,
+                message: 'Classe et semaine requises'
+            });
+        }
+        
+        // 1. Récupérer l'emploi du temps de la classe
+        const emplois = await db.collection('emplois_temps')
+            .find({ classe })
+            .sort({ jour: 1, periode: 1 })
+            .toArray();
+        
+        if (emplois.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `Aucun emploi du temps trouvé pour ${classe}`
+            });
+        }
+        
+        // 2. Récupérer les données de la distribution pour cette semaine et classe
+        const distribution = await db.collection('distribution')
+            .find({ 
+                Semaine: semaine, 
+                Classe: classe 
+            })
+            .toArray();
+        
+        // 3. Créer un plan pour chaque séance de l'emploi
+        const plans = [];
+        const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi'];
+        
+        emplois.forEach(emploi => {
+            if (emploi.type === 'pause' || !emploi.matiere) return;
+            
+            // Trouver les données de distribution correspondantes
+            const distData = distribution.find(d => 
+                d.Matière === emploi.matiere && 
+                d.Enseignant === emploi.enseignant
+            );
+            
+            plans.push({
+                semaine: semaine,
+                classe: classe,
+                matiere: emploi.matiere,
+                enseignant: emploi.enseignant,
+                jour: emploi.jour,
+                periode: emploi.periode,
+                horaire: emploi.horaire,
+                salle: emploi.salle || '',
+                objectifs: distData?.Objectifs || '',
+                competences: distData?.Compétences || '',
+                activites: distData?.Activités || '',
+                ressources: distData?.Ressources || '',
+                evaluation: distData?.Évaluation || '',
+                notes: '',
+                modifie: false,
+                date_creation: new Date()
+            });
+        });
+        
+        // 4. Insérer les plans (ou mettre à jour si existants)
+        const operations = plans.map(plan => ({
+            updateOne: {
+                filter: {
+                    semaine: plan.semaine,
+                    classe: plan.classe,
+                    matiere: plan.matiere,
+                    jour: plan.jour,
+                    periode: plan.periode
+                },
+                update: { $set: plan },
+                upsert: true
+            }
+        }));
+        
+        const result = await db.collection('plans_garcons').bulkWrite(operations);
+        
+        res.json({
+            success: true,
+            message: `Plans générés pour ${classe} - ${semaine}`,
+            inserted: result.upsertedCount,
+            updated: result.modifiedCount,
+            total: plans.length
+        });
+    } catch (error) {
+        console.error('Erreur génération plans:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+/**
  * Health check
  */
 router.get('/health', (req, res) => {
