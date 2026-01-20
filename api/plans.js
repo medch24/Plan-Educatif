@@ -334,6 +334,199 @@ router.post('/generate-from-emplois', async (req, res) => {
 });
 
 /**
+ * Générer un plan de leçon IA pour UNE seule séance (bouton disquette)
+ */
+router.post('/generate-single-ai-lesson-plan', async (req, res) => {
+    try {
+        const { week, rowData } = req.body;
+        
+        if (!week || !rowData) {
+            return res.status(400).json({
+                success: false,
+                message: 'Paramètres manquants (week, rowData)'
+            });
+        }
+        
+        // Import dynamique pour éviter les erreurs si le module n'est pas installé
+        const Docxtemplater = require('docxtemplater');
+        const PizZip = require('pizzip');
+        const fs = require('fs');
+        const path = require('path');
+        
+        // Template simple pour plan de leçon
+        const templatePath = path.join(__dirname, '../templates/lesson_plan_template.docx');
+        
+        // Si le template n'existe pas, créer un document simple
+        let docBuffer;
+        
+        if (fs.existsSync(templatePath)) {
+            const content = fs.readFileSync(templatePath, 'binary');
+            const zip = new PizZip(content);
+            const doc = new Docxtemplater(zip, {
+                paragraphLoop: true,
+                linebreaks: true
+            });
+            
+            doc.render({
+                semaine: week,
+                classe: rowData.Classe || '',
+                matiere: rowData.Matière || '',
+                enseignant: rowData.Enseignant || '',
+                jour: rowData.Jour || '',
+                periode: rowData.Période || '',
+                lecon: rowData.Leçon || '',
+                travaux: rowData['Travaux de classe'] || '',
+                support: rowData.Support || '',
+                devoirs: rowData.Devoirs || '',
+                date: new Date().toLocaleDateString('fr-FR')
+            });
+            
+            docBuffer = doc.getZip().generate({ type: 'nodebuffer' });
+        } else {
+            // Créer un document Word simple sans template
+            const Document = require('docx').Document;
+            const Packer = require('docx').Packer;
+            const Paragraph = require('docx').Paragraph;
+            const TextRun = require('docx').TextRun;
+            
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Plan de Leçon - Semaine ${week}`,
+                                    bold: true,
+                                    size: 32
+                                })
+                            ]
+                        }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: `Classe: ${rowData.Classe || ''}`, bold: true })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Matière: ${rowData.Matière || ''}`, bold: true })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Enseignant: ${rowData.Enseignant || ''}` })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Jour: ${rowData.Jour || ''}, Période: ${rowData.Période || ''}` })] }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Leçon:', bold: true })] }),
+                        new Paragraph({ text: rowData.Leçon || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Travaux de classe:', bold: true })] }),
+                        new Paragraph({ text: rowData['Travaux de classe'] || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Support:', bold: true })] }),
+                        new Paragraph({ text: rowData.Support || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Devoirs:', bold: true })] }),
+                        new Paragraph({ text: rowData.Devoirs || '' })
+                    ]
+                }]
+            });
+            
+            docBuffer = await Packer.toBuffer(doc);
+        }
+        
+        const filename = `Plan_Lecon_${rowData.Classe}_${rowData.Matière}_S${week}.docx`
+            .replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+        
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.send(docBuffer);
+        
+    } catch (error) {
+        console.error('Erreur génération plan IA unique:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erreur lors de la génération du plan de leçon',
+            error: error.message 
+        });
+    }
+});
+
+/**
+ * Générer plusieurs plans de leçon IA (bouton tableau) - ZIP
+ */
+router.post('/generate-multiple-ai-lesson-plans', async (req, res) => {
+    try {
+        const { week, rowsData } = req.body;
+        
+        if (!week || !rowsData || !Array.isArray(rowsData)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Paramètres manquants (week, rowsData array)'
+            });
+        }
+        
+        const archiver = require('archiver');
+        const { Document, Packer, Paragraph, TextRun } = require('docx');
+        
+        // Créer un ZIP
+        const archive = archiver('zip', { zlib: { level: 9 } });
+        
+        res.setHeader('Content-Type', 'application/zip');
+        res.setHeader('Content-Disposition', `attachment; filename="Plans_Lecon_IA_S${week}.zip"`);
+        
+        archive.pipe(res);
+        
+        // Générer un document Word pour chaque ligne
+        for (let i = 0; i < rowsData.length; i++) {
+            const rowData = rowsData[i];
+            
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Plan de Leçon - Semaine ${week}`,
+                                    bold: true,
+                                    size: 32
+                                })
+                            ]
+                        }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: `Classe: ${rowData.Classe || ''}`, bold: true })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Matière: ${rowData.Matière || ''}`, bold: true })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Enseignant: ${rowData.Enseignant || ''}` })] }),
+                        new Paragraph({ children: [new TextRun({ text: `Jour: ${rowData.Jour || ''}, Période: ${rowData.Période || ''}` })] }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Leçon:', bold: true })] }),
+                        new Paragraph({ text: rowData.Leçon || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Travaux de classe:', bold: true })] }),
+                        new Paragraph({ text: rowData['Travaux de classe'] || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Support:', bold: true })] }),
+                        new Paragraph({ text: rowData.Support || '' }),
+                        new Paragraph({ text: '' }),
+                        new Paragraph({ children: [new TextRun({ text: 'Devoirs:', bold: true })] }),
+                        new Paragraph({ text: rowData.Devoirs || '' })
+                    ]
+                }]
+            });
+            
+            const docBuffer = await Packer.toBuffer(doc);
+            
+            const filename = `Plan_${String(i + 1).padStart(3, '0')}_${rowData.Classe}_${rowData.Matière}_${rowData.Jour}.docx`
+                .replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+            
+            archive.append(docBuffer, { name: filename });
+        }
+        
+        await archive.finalize();
+        
+    } catch (error) {
+        console.error('Erreur génération plans IA multiples:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erreur lors de la génération des plans de leçon',
+            error: error.message 
+        });
+    }
+});
+
+/**
  * Health check
  */
 router.get('/health', (req, res) => {
