@@ -1,12 +1,35 @@
 # Système Scolaire Intégré 2025-2026
 
+![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
+![Version](https://img.shields.io/badge/Version-2.1.0-blue)
+![Section](https://img.shields.io/badge/Section-Secondaire%20Garçons-orange)
+![Node](https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green)
+
 ## 📚 Description
 
-Système unifié de gestion scolaire qui intègre trois modules interconnectés :
+Système unifié de gestion scolaire qui intègre **quatre modules interconnectés** pour la **Section Secondaire Garçons** :
 
-1. **Distribution Annuelle** : Planification annuelle des matières
-2. **Plans Hebdomadaires** : Plans hebdomadaires détaillés (Section Garçons)
-3. **Devoirs** : Suivi quotidien des devoirs (Section Garçons)
+1. **Distribution Annuelle** : Planification annuelle des matières (31 semaines)
+2. **Emplois du Temps** : Organisation hebdomadaire par jour/période ⭐ **NOUVEAU**
+3. **Plans Hebdomadaires** : Plans détaillés générés automatiquement
+4. **Devoirs** : Suivi quotidien des devoirs et évaluations
+
+## 🚀 Quick Start
+
+```bash
+# Installation
+npm install
+
+# Configuration (optionnel)
+cp .env.example .env
+
+# Démarrage
+npm start
+
+# Accès
+# Page d'accueil: http://localhost:3000
+# Emplois du Temps: http://localhost:3000/emplois.html
+```
 
 ## 🏗️ Architecture
 
@@ -14,15 +37,19 @@ Système unifié de gestion scolaire qui intègre trois modules interconnectés 
 systeme-scolaire-integre/
 ├── api/                    # Routes API modulaires
 │   ├── distribution.js     # API Distribution Annuelle
+│   ├── emplois.js         # API Emplois du Temps (NOUVEAU)
 │   ├── plans.js           # API Plans Hebdomadaires
 │   ├── devoirs.js         # API Devoirs
 │   └── sync.js            # API Synchronisation
 ├── config/                # Configuration
 │   └── database.js        # Connexion MongoDB
+├── data/                  # Données par défaut
+│   └── emplois_default.json  # Emplois du temps par défaut
 ├── modules/               # Modules réutilisables
 ├── public/                # Frontend
 │   ├── index.html         # Page d'accueil
 │   ├── distribution.html  # Module Distribution
+│   ├── emplois.html       # Module Emplois du Temps (NOUVEAU)
 │   ├── plans.html         # Module Plans
 │   ├── devoirs.html       # Module Devoirs
 │   ├── css/              # Styles CSS
@@ -30,23 +57,27 @@ systeme-scolaire-integre/
 │   └── images/           # Images
 ├── server.js             # Serveur Express principal
 ├── package.json          # Dépendances
+├── ARCHITECTURE.md       # Documentation architecture (NOUVEAU)
 └── .env                  # Configuration (à créer)
 ```
 
 ## 🔄 Flux de Synchronisation
 
 ```
-Distribution Annuelle (Données de base)
+Distribution Annuelle (Contenu pédagogique)
+    ↓
+Emplois du Temps (Structure horaire) ←── Chargement emplois par défaut
     ↓ (Synchronisation automatique)
-Plans Hebdomadaires (Garçons)
+Plans Hebdomadaires = Distribution + Emplois
     ↓ (Mise à jour journalière)
 Devoirs (Garçons)
 ```
 
 ### Points importants :
-- Les données de la **Distribution Annuelle** sont la source unique de vérité
-- Les **Plans Hebdomadaires** copient automatiquement les données mais peuvent être modifiés par les enseignants
-- Les modifications des plans n'affectent pas la distribution de base
+- Les **Emplois du Temps** définissent la structure (jour, période, horaire, matière, enseignant)
+- La **Distribution Annuelle** fournit le contenu (objectifs, activités, ressources)
+- Les **Plans Hebdomadaires** sont générés automatiquement en combinant Emplois + Distribution
+- Les enseignants peuvent modifier les plans sans affecter les sources
 - Les **Devoirs** sont synchronisés quotidiennement depuis les plans
 
 ## 🚀 Installation

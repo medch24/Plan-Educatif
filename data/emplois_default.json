@@ -1,0 +1,862 @@
+{
+  "PEI1-G": {
+    "Dimanche": [
+      {
+        "matiere": "Sciences",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      }
+    ],
+    "Lundi": [
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Sciences",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      }
+    ],
+    "Mardi": [
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      },
+      {
+        "matiere": "Arts",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "Sciences",
+        "enseignant": "Zine"
+      }
+    ],
+    "Mercredi": [
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Sciences",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Bibliothèque",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Musique",
+        "enseignant": "Sami"
+      }
+    ],
+    "Jeudi": [
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Sciences",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      }
+    ]
+  },
+  "PEI2-G": {
+    "Dimanche": [
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      }
+    ],
+    "Lundi": [
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      }
+    ],
+    "Mardi": [
+      {
+        "matiere": "Arts",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      }
+    ],
+    "Mercredi": [
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Musique",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      }
+    ],
+    "Jeudi": [
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Bibliothèque",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      }
+    ]
+  },
+  "PEI3-G": {
+    "Dimanche": [
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Arts",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      }
+    ],
+    "Lundi": [
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      }
+    ],
+    "Mardi": [
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Musique",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      }
+    ],
+    "Mercredi": [
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      }
+    ],
+    "Jeudi": [
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Bibliothèque",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      }
+    ]
+  },
+  "PEI4-G": {
+    "Dimanche": [
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      }
+    ],
+    "Lundi": [
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Arts",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      }
+    ],
+    "Mardi": [
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "الدراسات الاجتماعية",
+        "enseignant": "Jaber"
+      }
+    ],
+    "Mercredi": [
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      }
+    ],
+    "Jeudi": [
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Design",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Bibliothèque",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      }
+    ]
+  },
+  "DP2-G": {
+    "Dimanche": [
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Mohamed"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      }
+    ],
+    "Lundi": [
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Mohamed"
+      },
+      {
+        "matiere": "Arts",
+        "enseignant": "Sami"
+      },
+      {
+        "matiere": "ES (Systèmes de l'env.)",
+        "enseignant": "Sylvano Hervé"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      }
+    ],
+    "Mardi": [
+      {
+        "matiere": "ES (Systèmes de l'env.)",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "التاريخ",
+        "enseignant": "Jaber"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Mohamed"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      }
+    ],
+    "Mercredi": [
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Physique-Chimie",
+        "enseignant": "Mohamed"
+      },
+      {
+        "matiere": "Sciences Éco. et Sociales",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "الدراسات الإسلامية",
+        "enseignant": "Majed"
+      },
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Éducation Physique",
+        "enseignant": "Mohamed Ali"
+      }
+    ],
+    "Jeudi": [
+      {
+        "matiere": "اللغة العربية",
+        "enseignant": "Imad"
+      },
+      {
+        "matiere": "Anglais",
+        "enseignant": "Kamel"
+      },
+      {
+        "matiere": "Langue et Littérature",
+        "enseignant": "Abas French"
+      },
+      {
+        "matiere": "Mathématiques",
+        "enseignant": "Tonga"
+      },
+      {
+        "matiere": "Biologie",
+        "enseignant": "Zine"
+      },
+      {
+        "matiere": "Bibliothèque",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "Individus et Sociétés",
+        "enseignant": "Youssif"
+      },
+      {
+        "matiere": "ES (Systèmes de l'env.)",
+        "enseignant": "Sylvano Hervé"
+      }
+    ]
+  }
+}

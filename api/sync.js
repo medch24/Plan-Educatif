@@ -175,6 +175,115 @@ router.post('/plans-to-devoirs', async (req, res) => {
 });
 
 /**
+ * Synchronisation : Emplois du Temps + Distribution → Plans Hebdomadaires
+ * Génère automatiquement les plans basés sur l'emploi du temps et la distribution
+ */
+router.post('/emplois-to-plans', async (req, res) => {
+    try {
+        const db = getDB();
+        const { classe, semaine } = req.body;
+        
+        if (!classe || !semaine) {
+            return res.status(400).json({
+                success: false,
+                message: 'Classe et semaine requises'
+            });
+        }
+        
+        // 1. Récupérer l'emploi du temps
+        const emplois = await db.collection('emplois_temps')
+            .find({ classe, type: 'cours' })
+            .sort({ jour: 1, periode: 1 })
+            .toArray();
+        
+        if (emplois.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `Aucun emploi du temps trouvé pour ${classe}`
+            });
+        }
+        
+        // 2. Récupérer la distribution pour cette semaine
+        const distribution = await db.collection('distribution')
+            .find({ Semaine: semaine, Classe: classe })
+            .toArray();
+        
+        // 3. Créer les plans en combinant emploi + distribution
+        const plans = [];
+        
+        emplois.forEach(emploi => {
+            if (!emploi.matiere) return;
+            
+            // Trouver la distribution correspondante
+            const distData = distribution.find(d => 
+                d.Matière === emploi.matiere
+            ) || {};
+            
+            plans.push({
+                semaine: semaine,
+                classe: classe,
+                matiere: emploi.matiere,
+                enseignant: emploi.enseignant,
+                jour: emploi.jour,
+                periode: emploi.periode,
+                horaire: emploi.horaire,
+                salle: emploi.salle || '',
+                // Données de la distribution
+                contenu: distData.Contenu || '',
+                pages_manuel: distData['Pages Manuel'] || '',
+                pages_cahier: distData['Pages Cahier'] || '',
+                objectifs: distData.Objectifs || '',
+                competences: distData.Compétences || '',
+                activites: distData.Activités || '',
+                ressources: distData.Ressources || '',
+                evaluation: distData.Évaluation || '',
+                // Métadonnées
+                source: 'emploi_distribution',
+                date_sync: new Date(),
+                modifie: false
+            });
+        });
+        
+        if (plans.length === 0) {
+            return res.json({
+                success: true,
+                message: 'Aucun plan à générer',
+                count: 0
+            });
+        }
+        
+        // 4. Sauvegarder dans plans_garcons
+        const operations = plans.map(plan => ({
+            updateOne: {
+                filter: {
+                    semaine: plan.semaine,
+                    classe: plan.classe,
+                    matiere: plan.matiere,
+                    jour: plan.jour,
+                    periode: plan.periode
+                },
+                update: { $set: plan },
+                upsert: true
+            }
+        }));
+        
+        const result = await db.collection('plans_garcons').bulkWrite(operations);
+        
+        res.json({
+            success: true,
+            message: `Plans générés pour ${classe} - ${semaine}`,
+            inserted: result.upsertedCount,
+            updated: result.modifiedCount,
+            total: plans.length
+        });
+        
+    } catch (error) {
+        console.error('Erreur sync emplois → plans:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+/**
  * Synchronisation complète pour une semaine (garçons uniquement)
  */
 router.post('/sync-week', async (req, res) => {

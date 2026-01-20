@@ -152,7 +152,26 @@ router.get('/enseignants/:className', async (req, res) => {
 });
 
 /**
- * Générer emploi du temps par défaut basé sur le PDF fourni
+ * Charger emplois depuis le fichier JSON
+ */
+function loadEmploisFromJSON() {
+    try {
+        const fs = require('fs');
+        const path = require('path');
+        const jsonPath = path.join(__dirname, '../data/emplois_default.json');
+        
+        if (fs.existsSync(jsonPath)) {
+            const data = fs.readFileSync(jsonPath, 'utf8');
+            return JSON.parse(data);
+        }
+    } catch (error) {
+        console.error('Erreur chargement emplois JSON:', error);
+    }
+    return null;
+}
+
+/**
+ * Générer emploi du temps par défaut basé sur le fichier JSON
  */
 function getDefaultEmploi(className) {
     const horaires = [
@@ -171,45 +190,19 @@ function getDefaultEmploi(className) {
         { periode: 'pause2', horaire: '13:15 - 13:45', nom: '2nd Secondary Break' }
     ];
     
-    // Emploi du temps par défaut pour PEI1 Garçons (basé sur le PDF)
-    const emploiPEI1 = {
-        'Dimanche': [
-            { matiere: 'Sciences', enseignant: 'Zine' },
-            { matiere: 'Islamic', enseignant: 'Majed' },
-            { matiere: 'French L.L', enseignant: 'Abas' },
-            { matiere: 'IS', enseignant: 'Youssif' },
-            { matiere: 'Maths', enseignant: 'Sylvano Hervé' },
-            { matiere: 'P.E', enseignant: 'Mohamed Ali' },
-            { matiere: 'Easy Arabic', enseignant: 'Saeed Sulami' },
-            { matiere: 'Anglais', enseignant: 'Kamel' }
-        ],
-        'Lundi': [
-            { matiere: 'Design', enseignant: 'Tonga' },
-            { matiere: 'French L.L', enseignant: 'Abas' },
-            { matiere: 'Easy Arabic', enseignant: 'Saeed Sulami' },
-            { matiere: 'Anglais', enseignant: 'Kamel' },
-            { matiere: 'Maths', enseignant: 'Sylvano Hervé' },
-            { matiere: 'Arabic', enseignant: 'Saeed Sulami' },
-            { matiere: 'French L.L', enseignant: 'Abas' },
-            { matiere: 'Maths', enseignant: 'Sylvano Hervé' }
-        ],
-        'Mardi': [
-            { matiere: 'Islamic', enseignant: 'Majed' },
-            { matiere: 'Islamic', enseignant: 'Majed' },
-            { matiere: 'IS', enseignant: 'Youssif' },
-            { matiere: '', enseignant: '' },
-            { matiere: '', enseignant: '' },
-            { matiere: '', enseignant: '' },
-            { matiere: '', enseignant: '' },
-            { matiere: '', enseignant: '' }
-        ]
-    };
+    // Charger depuis JSON
+    const emploisJSON = loadEmploisFromJSON();
+    let emploiData = null;
+    
+    if (emploisJSON && emploisJSON[className]) {
+        emploiData = emploisJSON[className];
+    }
     
     const emploi = [];
     const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi'];
     
     jours.forEach(jour => {
-        const seances = emploiPEI1[jour] || [];
+        const seances = emploiData ? (emploiData[jour] || []) : [];
         
         horaires.forEach((h, index) => {
             const seance = seances[index] || { matiere: '', enseignant: '' };
@@ -254,6 +247,45 @@ function getDefaultEmploi(className) {
     
     return emploi;
 }
+
+/**
+ * Charger emploi par défaut dans la base de données
+ */
+router.post('/load-default/:className', async (req, res) => {
+    try {
+        const db = getDB();
+        const { className } = req.params;
+        
+        if (!db) {
+            return res.status(503).json({
+                success: false,
+                message: 'Base de données non disponible'
+            });
+        }
+        
+        const emploiDefault = getDefaultEmploi(className);
+        
+        if (!emploiDefault || emploiDefault.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `Aucun emploi par défaut trouvé pour ${className}`
+            });
+        }
+        
+        // Supprimer l'ancien et insérer le nouveau
+        await db.collection('emplois_temps').deleteMany({ classe: className });
+        await db.collection('emplois_temps').insertMany(emploiDefault);
+        
+        res.json({
+            success: true,
+            message: `Emploi par défaut chargé pour ${className}`,
+            count: emploiDefault.length
+        });
+    } catch (error) {
+        console.error('Erreur chargement emploi par défaut:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
 
 /**
  * Health check

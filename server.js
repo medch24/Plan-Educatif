@@ -35,6 +35,8 @@ app.get('/', (req, res) => {
 });
 
 // Routes API modulaires
+const authRoutes = require('./api/auth');
+app.use('/api/auth', authRoutes);
 app.use('/api/distribution', distributionRoutes);
 app.use('/api/emplois', emploisRoutes);
 app.use('/api/plans', plansRoutes);

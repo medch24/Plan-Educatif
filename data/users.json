@@ -1,0 +1,83 @@
+{
+  "enseignants": [
+    {
+      "username": "Zine",
+      "password": "Zine",
+      "nom_complet": "Zine",
+      "matieres": ["Sciences", "Biologie", "ES (Systèmes de l'env.)"]
+    },
+    {
+      "username": "Majed",
+      "password": "Majed",
+      "nom_complet": "Majed",
+      "matieres": ["الدراسات الإسلامية"]
+    },
+    {
+      "username": "Abas French",
+      "password": "Abas French",
+      "nom_complet": "Abas French",
+      "matieres": ["Langue et Littérature"]
+    },
+    {
+      "username": "Youssif",
+      "password": "Youssif",
+      "nom_complet": "Youssif",
+      "matieres": ["Individus et Sociétés", "Bibliothèque", "Sciences Éco. et Sociales"]
+    },
+    {
+      "username": "Sylvano Hervé",
+      "password": "Sylvano Hervé",
+      "nom_complet": "Sylvano Hervé",
+      "matieres": ["Mathématiques", "Physique-Chimie", "ES (Systèmes de l'env.)"]
+    },
+    {
+      "username": "Mohamed Ali",
+      "password": "Mohamed Ali",
+      "nom_complet": "Mohamed Ali",
+      "matieres": ["Éducation Physique"]
+    },
+    {
+      "username": "Imad",
+      "password": "Imad",
+      "nom_complet": "Imad",
+      "matieres": ["اللغة العربية"]
+    },
+    {
+      "username": "Kamel",
+      "password": "Kamel",
+      "nom_complet": "Kamel",
+      "matieres": ["Anglais"]
+    },
+    {
+      "username": "Tonga",
+      "password": "Tonga",
+      "nom_complet": "Tonga",
+      "matieres": ["Design", "Physique-Chimie", "Mathématiques"]
+    },
+    {
+      "username": "Jaber",
+      "password": "Jaber",
+      "nom_complet": "Jaber",
+      "matieres": ["الدراسات الاجتماعية", "التاريخ"]
+    },
+    {
+      "username": "Sami",
+      "password": "Sami",
+      "nom_complet": "Sami",
+      "matieres": ["Arts", "Musique"]
+    },
+    {
+      "username": "Mohamed",
+      "password": "Mohamed",
+      "nom_complet": "Mohamed",
+      "matieres": ["Physique-Chimie"]
+    },
+    {
+      "username": "Admin",
+      "password": "Admin2026",
+      "nom_complet": "Administrateur",
+      "matieres": ["*"],
+      "role": "admin"
+    }
+  ]
+}
