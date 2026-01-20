@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "init": "node scripts/init-all.js",
+    "init:users": "node scripts/init-users.js",
+    "init:emplois": "node scripts/init-emplois.js",
     "test": "echo \"Tests à implémenter\" && exit 0"
   },
   "dependencies": {
